@@ -5,7 +5,7 @@ class SiteController extends Controller {
 
 	public function actionIndex() {
 		$messages = $this->getMessages();
-		$this->render('site/general', array('messages' => $messages));
+		$this->render('general/index', array('messages' => $messages));
 	}
 
 	public function getMessages() {
