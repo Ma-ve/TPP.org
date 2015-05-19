@@ -1,0 +1,8 @@
+{
+	"TWITCHVERSION"		: "ar",
+	"DB_DATABASE"		: "deb31188n4_twitch",
+
+	"DB_HOST"			: "localhost",
+	"DB_USER"			: "root",
+	"DB_PASS"			: ""
+}
