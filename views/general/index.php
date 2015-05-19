@@ -7,8 +7,8 @@
 
 					<span class="pull-right last-update">Last update: <?= $this->help->getDateTime($this->general['last_update']['value']); ?></span>
 				</h1><?php
-	if(!empty($params['messages'])) {
-		$this->render('site/general/_messages', array('messages' => $params['messages']));
+	if(!empty($messages)) {
+		$this->render('general/_messages', array('messages' => $messages));
 	} ?>
 
 		<div class="pull-left current-status">

@@ -1,11 +1,18 @@
 <?php
 
 class SiteController extends Controller {
+
 	//a
 
 	public function actionIndex() {
 		$messages = $this->getMessages();
-		$this->render('general/index', array('messages' => $messages));
+		$this->render('general/index', array(
+			'messages' => $messages
+		));
+
+		$this->render('pokemon/index', array(
+			'party_pokemon' => Pokemon::getPartyPokemon($this->db)
+		));
 	}
 
 	public function getMessages() {

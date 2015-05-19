@@ -1,5 +1,5 @@
 <?php
-$ms = $params['messages']; ?>
+$ms = $messages; ?>
 
 				<div class="alert alert-info">
 					<p><strong>Heyo! You have a new message:</strong></p>
