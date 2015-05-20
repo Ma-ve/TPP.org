@@ -6,5 +6,3 @@
 				<span class="pull-right">Seen: <?= $this->general['pokedex_seen']['value']; ?></span>
 				<span class="pull-right pokedex-container"><a class="pop-pokedex" href="/pokedex"><img src="/img/misc/pokeball_sprite.png" alt="Open Pok&eacute;dex" title="Open Pok&eacute;dex" class="pokedex">Pok&eacute;dex!</a></span>
 			</h3>
-			<div class="table-responsive table-bordered table-pokemon pokemon-scrollable">
-				<table class="table">
