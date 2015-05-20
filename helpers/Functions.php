@@ -3,7 +3,6 @@
 /**
  * Function Helper
  */
-
 class FuncHelp {
 
 	public function getDateTime($time, $secs = null) {
@@ -48,6 +47,26 @@ class FuncHelp {
 			$obj['s'] = (int) $seconds;
 		}
 		return $obj;
+	}
+
+	public static function safeName($name) {
+		return strtolower(str_replace(
+						array(
+			' ',
+			'.',
+			'é',
+			'-',
+			'\'',
+			'&eacute;',
+						), array(
+			'_',
+			'',
+			'',
+			'_',
+			'',
+			'',
+						), $name)
+		);
 	}
 
 }
