@@ -34,7 +34,7 @@ class Pokemon extends Model {
 						'gender' => $newPokemon->setGender($pok['gender']),
 						'hold_item' => $newPokemon->setHoldItem($pok['hold_item']),
 						'moves' => Move::getMovesForPokemon($pok['id']),
-					));
+			));
 			$newPokemon->setAttributes($newPokemon->getFields());
 
 //	$hmArray = explode(';', $gen['hms']['value']);
@@ -116,8 +116,10 @@ class Pokemon extends Model {
 	private function getGender($g) {
 		$return = ' <span class="gender">(&#979';
 		switch($g[0]) {
-			case 'm': $return .= '4'; break;
-			case 'f': $return .= '2'; break;
+			case 'm': $return .= '4';
+				break;
+			case 'f': $return .= '2';
+				break;
 		}
 
 		return $return . ';)</span>';
@@ -135,4 +137,36 @@ class Pokemon extends Model {
 		return parent::image('/pokemon/sprites/red', $this->pokemon . $addToImage, $htmlOptions);
 	}
 
+	public function getNicknames() {
+		$return = '';
+		$array = explode('%', $this->nickname);
+		$i = 0;
+		if($this->nickname == 'No nickname') {
+			return $this->nickname;
+		} else {
+			foreach($array as $ar) {
+				$return .= '"' . utf8_decode($ar) . '"';
+				if(count($array) > 1) {
+					$return .= $i < count($array) - 1 ? ',<br>' : '';
+				}
+				$i++;
+			}
+		}
+		echo $return;
+	}
+
+	public function getMoves() {
+		$return = array();
+		if(isset($this->moves)) {
+			$hms = FuncHelp::getHmMoves();
+			foreach($this->moves as $move) {
+				if(in_array($move, $hms)) {
+					$return[] = '<strong>' . $move . '</strong>';
+				} else {
+					$return[] = $move;
+				}
+			}
+		}
+		return $return;
+	}
 }

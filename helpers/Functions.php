@@ -69,4 +69,16 @@ class FuncHelp {
 		);
 	}
 
+	public static function getHmMoves() {
+		return array(
+			'Cut',
+			'Fly',
+			'Surf',
+			'Strength',
+			'Flash',
+			'Whirlpool',
+			'Waterfall'			
+		);
+	}
+
 }
