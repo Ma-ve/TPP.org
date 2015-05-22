@@ -1,10 +1,6 @@
 
 					<tr><?php
-for($i = 0; $i < count($party_pokemon); $i++) {
-	$p = $party_pokemon[$i];
-
-	$westEast = isset($genders[$i][1]) ? getWestEast($genders[$i][1]) : '';
-	$season = isset($fields[$i]['season']) ? getSeason($fields[$i]['season']) : ''; ?>
+foreach($party_pokemon as $p) { ?>
 
 						<td class="no-padding">
 							<div class="padding8">
