@@ -2,6 +2,9 @@
 
 class Move extends Model {
 	
+	public $name;
+	public $level;
+	
 	public function loadModel($id) {
 		
 	}
@@ -13,7 +16,9 @@ class Move extends Model {
 		$query->bind_result($name);
 		$query->store_result();
 		while($query->fetch()) {
-			$return[] = $name;
+			$model = new self();
+			$model->name = $name;
+			$return[] = $model;
 		}
 		return $return;
 	}

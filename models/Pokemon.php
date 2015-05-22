@@ -9,7 +9,7 @@ class Pokemon extends Model {
 	public $nickname;
 	public $poke_ball;
 	public $gender;
-	public $held_item;
+	public $hold_item;
 
 	public function showSomething() {
 		$cont = new SiteController();
@@ -66,6 +66,16 @@ class Pokemon extends Model {
 		while($fi = $getFields->fetch_assoc()) {
 			$fields[$fi['name']] = $fi['value'];
 		}
+		if(isset($fields['next_move'])) {
+			$move = new Move();
+			$move->name = $fields['next_move'];
+			unset($fields['next_move']);
+			if(isset($fields['next_move_level'])) {
+				$move->level = $fields['next_move_level'];
+				unset($fields['next_move_level']);
+			}
+			$fields['next_move'] = $move;
+		}
 		return $fields;
 	}
 
@@ -96,6 +106,12 @@ class Pokemon extends Model {
 	}
 
 	private function setHoldItem($hold_item) {
+		if(!is_null($hold_item)) {
+			$item = new Item();
+			$item->setName($hold_item);
+			return $item;
+		}
+		return null;
 //		return isset($hold_item) ?
 //				'Holds: '
 //				. utf8_encode(stripslashes($hold_item))
@@ -160,10 +176,10 @@ class Pokemon extends Model {
 		if(isset($this->moves)) {
 			$hms = FuncHelp::getHmMoves();
 			foreach($this->moves as $move) {
-				if(in_array($move, $hms)) {
-					$return[] = '<strong>' . $move . '</strong>';
+				if(in_array($move->name, $hms)) {
+					$return[] = '<strong>' . $move->name . '</strong>';
 				} else {
-					$return[] = $move;
+					$return[] = $move->name;
 				}
 			}
 		}

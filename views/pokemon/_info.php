@@ -1,7 +1,6 @@
 
 					<tr><?php
-for($i = 0; $i < count($party_pokemon); $i++) {
-	$p = $party_pokemon[$i]; ?>
+foreach($party_pokemon as $p) { ?>
 
 						<th><?php
 						echo $p->name;
