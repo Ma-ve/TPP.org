@@ -1,6 +1,6 @@
 
 					<tr><?php
-foreach($party_pokemon as $p) { ?>
+foreach($pokemon as $p) { ?>
 
 						<td class="valign-middle">Level <?= $p->level; ?><?php
 	if(isset($p->has_pokerus)) {

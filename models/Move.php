@@ -15,6 +15,7 @@ class Move extends Model {
 		$query->execute();
 		$query->bind_result($name);
 		$query->store_result();
+		$return = [];
 		while($query->fetch()) {
 			$model = new self();
 			$model->name = $name;

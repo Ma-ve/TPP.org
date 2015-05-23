@@ -16,39 +16,36 @@ class Pokemon extends Model {
 		echo $cont->actionIndex();
 	}
 
-	public static function getPokemon($where = null) {
+	public static function getPokemon($where = null, $order = null, $limit = null) {
 		if(!is_null($where)) {
-			$where = 'WHERE ' . $where;
+			$where = ' WHERE ' . $where;
+		} if(!is_null($order)) {
+			$order = ' ORDER BY ' . $order;
+		} if(!is_null($limit)) {
+			$limit = ' LIMIT ' . $limit;
 		}
-		$getPokemon = TPP::db()->query("SELECT * FROM `pokemon` " . $where . " ORDER BY `party_order` ASC LIMIT 6") or die($db->error);
+		$getPokemon = TPP::db()->query("SELECT * FROM `pokemon`" . $where . $order . $limit) or die(TPP::db()->error);
 		while($pok = $getPokemon->fetch_assoc()) {
-			$newPokemon = new Pokemon();
-			$newPokemon->setAttributes(
-					array(
-						'id' => $pok['id'],
-						'name' => $newPokemon->setName($pok['name'], $pok['pokemon']),
-						'pokemon' => $newPokemon->setPokemon($pok['pokemon']),
-						'level' => $newPokemon->setLevel($pok['level']),
-						'nickname' => $newPokemon->setNickname($pok['nickname']),
-						'poke_ball' => $newPokemon->setPokeBall($pok['poke_ball']),
-						'gender' => $newPokemon->setGender($pok['gender']),
-						'hold_item' => $newPokemon->setHoldItem($pok['hold_item']),
-						'moves' => Move::getMovesForPokemon($pok['id']),
+			$newPokemon = new self();
+			$newPokemon->setAttributes(array(
+				'id' => $pok['id'],
+				'name' => $newPokemon->setName($pok['name'], $pok['pokemon']),
+				'pokemon' => $newPokemon->setPokemon($pok['pokemon']),
+				'level' => $newPokemon->setLevel($pok['level']),
+				'nickname' => $newPokemon->setNickname($pok['nickname']),
+				'poke_ball' => $newPokemon->setPokeBall($pok['poke_ball']),
+				'gender' => $newPokemon->setGender($pok['gender']),
+				'hold_item' => $newPokemon->setHoldItem($pok['hold_item']),
+				'moves' => Move::getMovesForPokemon($pok['id']),
 			));
 			$newPokemon->setAttributes($newPokemon->getFields());
 
-//	$hmArray = explode(';', $gen['hms']['value']);
-//	$getMoves = $db->query("SELECT * FROM `move` WHERE `pokemon` = '$pok[id]'");
-//	while($move = $getMoves->fetch_assoc()) {
-//		$moves[$moveCounter][] = in_array($move['name'], $hmArray) ? '<strong>' . $move['name'] . '</strong>' : $move['name'];
-//	} $moveCounter++;
-//	$fields[] = getFields($pok['id']);
 			$return[] = $newPokemon;
 		}
 		return $return;
 	}
 
-	private function getFields() {
+	public function getFields() {
 		$fields = array();
 		$getFields = TPP::db()->query("
 		SELECT
@@ -79,54 +76,51 @@ class Pokemon extends Model {
 		return $fields;
 	}
 
-	private function setName($name, $pokemon) {
+	public function setName($name, $pokemon) {
 		return !empty($name) ? str_replace(array(' ', '\Pk'), array('&nbsp;', '<img src="/img/pk.png" title="" alt="">'), stripslashes(utf8_encode($name))) : utf8_encode($pokemon);
 	}
 
-	private function setPokemon($pokemon) {
+	public function setPokemon($pokemon) {
 		return utf8_encode($pokemon);
 	}
 
-	private function setLevel($level) {
+	public function setLevel($level) {
 		return $level !== 0 ? $level : '?';
 	}
 
-	private function setNickname($nickname) {
+	public function setNickname($nickname) {
 		return isset($nickname) ? stripslashes(utf8_encode($nickname)) : 'No nickname';
 	}
 
-	private function setPokeBall($poke_ball) {
+	public function setPokeBall($poke_ball) {
 		$item = new Item();
 		$item->setName($poke_ball);
 		return $item;
 	}
 
-	private function setGender($gender) {
+	public function setGender($gender) {
 		return isset($gender) ? $this->getGender($gender) : null;
 	}
 
-	private function setHoldItem($hold_item) {
+	public function setHoldItem($hold_item) {
 		if(!is_null($hold_item)) {
 			$item = new Item();
 			$item->setName($hold_item);
 			return $item;
 		}
 		return null;
-//		return isset($hold_item) ?
-//				'Holds: '
-//				. utf8_encode(stripslashes($hold_item))
-//				. ' <img src="/img/items/'
-//				. FuncHelp::toImage($hold_item)
-//				. '.png" title="'. utf8_encode(stripslashes($hold_item))
-//				. '" alt="' . utf8_encode(stripslashes($hold_item)) . '">'
-//			: '<em>No held item</em>';
-		$item = new Item();
-		$item->setName($hold_item);
-		return $item;
 	}
 
 	public static function getPartyPokemon() {
-		return Pokemon::getPokemon('`status` = 1');
+		return Pokemon::getPokemon('`status` = 1', `party_order`, '6');
+	}
+
+	public static function getBoxPokemon() {
+		return Pokemon::getPokemon('`status` = 2', '`id` DESC');
+	}
+
+	public static function getDaycarePokemon() {
+		return Pokemon::getPokemon('`status` = 6', '`id` DESC');
 	}
 
 	private function getGender($g) {
@@ -141,8 +135,10 @@ class Pokemon extends Model {
 		return $return . ';)</span>';
 	}
 
-	public function showImage($htmlOptions = array()) {
-		return parent::image('/pokemon', $this->pokemon, $htmlOptions);
+	public function showImage($htmlOptions = array(), $size = null) {
+		$path = '/pokemon';
+		$path .= !is_null($size) ? '/80' : '';
+		return parent::image($path, $this->pokemon, $htmlOptions);
 	}
 
 	public function showMenuImage($htmlOptions = array()) {
@@ -158,7 +154,7 @@ class Pokemon extends Model {
 		$array = explode('%', $this->nickname);
 		$i = 0;
 		if($this->nickname == 'No nickname') {
-			return $this->nickname;
+			return '<em>' . $this->nickname . '</em>';
 		} else {
 			foreach($array as $ar) {
 				$return .= '"' . utf8_decode($ar) . '"';
@@ -185,4 +181,5 @@ class Pokemon extends Model {
 		}
 		return $return;
 	}
+
 }
