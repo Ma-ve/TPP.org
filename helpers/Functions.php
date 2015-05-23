@@ -5,13 +5,13 @@
  */
 class FuncHelp {
 
-	public function getDateTime($time, $secs = null) {
+	public static function getDateTime($time, $secs = null) {
 		$startTime = 1423771200;
 		if(is_numeric($time)) {
 			$getTime = $time - $startTime;
 			if($getTime > 0) {
 				$return = '';
-				foreach($this->secondsToTime($getTime, $secs) as $key => $value) {
+				foreach(self::secondsToTime($getTime, $secs) as $key => $value) {
 					$return .= $value . $key . ' ';
 				}
 				return substr($return, 0, -1);
@@ -23,7 +23,7 @@ class FuncHelp {
 		}
 	}
 
-	private function secondsToTime($inputSeconds, $secs = null) {
+	private static function secondsToTime($inputSeconds, $secs = null) {
 
 		$secondsInAMinute = 60;
 		$secondsInAnHour = 60 * $secondsInAMinute;

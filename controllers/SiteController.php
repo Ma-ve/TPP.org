@@ -11,7 +11,19 @@ class SiteController extends Controller {
 		));
 
 		$this->render('pokemon/index', array(
-			'party_pokemon' => Pokemon::getPartyPokemon()
+			'pokemon' => Pokemon::getPartyPokemon()
+		));
+
+		$this->render('badge/index', array(
+			'badges' => Badge::getBadges(null, 'LIMIT 0, 8')
+		));
+
+		$this->render('pokemon_box/index', array(
+			'pokemon' => Pokemon::getBoxPokemon()
+		));
+
+		$this->render('pokemon_daycare/index', array(
+			'pokemon' => Pokemon::getDaycarePokemon()
 		));
 	}
 

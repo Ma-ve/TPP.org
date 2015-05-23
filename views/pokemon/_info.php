@@ -1,11 +1,9 @@
 
+					<tr class="tr-spacer"></tr>
 					<tr><?php
-foreach($party_pokemon as $p) { ?>
+foreach($pokemon as $p) { ?>
 
-						<th><?php
-						echo $p->name;
-						echo $p->gender;
-						echo $p->poke_ball->showImage(); ?>
+						<th><?= $p->name; ?><?= isset($p->gender) ? ' ' . $p->gender : ''; ?><?= isset($p->poke_ball) ? ' ' . $p->poke_ball->showImage() : ''; ?>
 
 							<br>
 							<small class="pokemon-name">
