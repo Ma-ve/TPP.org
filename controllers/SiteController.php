@@ -25,6 +25,14 @@ class SiteController extends Controller {
 		$this->render('pokemon_daycare/index', array(
 			'pokemon' => Pokemon::getDaycarePokemon()
 		));
+
+//		$this->render('item/index', array(
+//			'items' => Item::getAllItems()
+//		));
+
+		$this->render('pokemon_history/index', array(
+			'pokemon' => Pokemon::getHistoryPokemon()
+		));
 	}
 
 	public function getMessages() {

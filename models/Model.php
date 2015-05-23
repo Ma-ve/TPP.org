@@ -4,7 +4,8 @@ class Model {
 
 	public function setAttributes($attributes) {
 		foreach($attributes as $key => $value) {
-			$this->$key = $value;
+			$key = gettype($key) === 'string' ? utf8_encode($key) : $key;
+			$this->$key = gettype($value) === 'string' ? utf8_encode($value) : $value;
 		}
 	}
 
