@@ -123,16 +123,23 @@ class Pokemon extends Model {
 		return Pokemon::getPokemon('`status` = 6', '`id` DESC');
 	}
 
-	private function getGender($g) {
-		$return = ' <span class="gender">(&#979';
-		switch($g[0]) {
-			case 'm': $return .= '4';
-				break;
-			case 'f': $return .= '2';
-				break;
-		}
+	public static function getHistoryPokemon() {
+		return Pokemon::getPokemon('`status` NOT IN(1,2,6,9)', '`comment` DESC');
+	}
 
-		return $return . ';)</span>';
+	private function getGender($g) {
+		if(isset($g[0])) {
+			$return = ' <span class="gender">(&#979';
+			switch($g[0]) {
+				case 'm': $return .= '4';
+					break;
+				case 'f': $return .= '2';
+					break;
+			}
+
+			return $return . ';)</span>';
+		}
+		return null;
 	}
 
 	public function showImage($htmlOptions = array(), $size = null) {
