@@ -5,7 +5,7 @@
  */
 class FuncHelp {
 
-	public static function getDateTime($time, $secs = null) {
+	public static function getDateTime($time, $secs = false) {
 		$startTime = 1423771200;
 		if(is_numeric($time)) {
 			$getTime = $time - $startTime;
@@ -23,7 +23,7 @@ class FuncHelp {
 		}
 	}
 
-	private static function secondsToTime($inputSeconds, $secs = null) {
+	private static function secondsToTime($inputSeconds, $secs = false) {
 
 		$secondsInAMinute = 60;
 		$secondsInAnHour = 60 * $secondsInAMinute;
@@ -43,7 +43,7 @@ class FuncHelp {
 		$obj['d'] = (int) $days;
 		$obj['h'] = (int) $hours;
 		$obj['m'] = (int) $minutes;
-		if(!is_null($secs)) {
+		if($secs) {
 			$obj['s'] = (int) $seconds;
 		}
 		return $obj;
