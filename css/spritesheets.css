@@ -1,0 +1,256 @@
+.sprite-menu{background-image:url(../img/pokemon/sprites/menu-static/spritesheet.png);background-repeat:no-repeat;display:inline-block;width:32px;height:32px}
+.sprite-menu-abra{background-position:-5px -5px}
+.sprite-menu-aerodactyl{background-position:-47px -5px}
+.sprite-menu-alakazam{background-position:-89px -5px}
+.sprite-menu-arbok{background-position:-131px -5px}
+.sprite-menu-arcanine{background-position:-173px -5px}
+.sprite-menu-articuno{background-position:-215px -5px}
+.sprite-menu-beedrill{background-position:-257px -5px}
+.sprite-menu-bellsprout{background-position:-299px -5px}
+.sprite-menu-blastoise{background-position:-341px -5px}
+.sprite-menu-bulbasaur{background-position:-383px -5px}
+.sprite-menu-butterfree{background-position:-425px -5px}
+.sprite-menu-caterpie{background-position:-467px -5px}
+.sprite-menu-chansey{background-position:-5px -47px}
+.sprite-menu-charizard{background-position:-47px -47px}
+.sprite-menu-charmander{background-position:-89px -47px}
+.sprite-menu-charmeleon{background-position:-131px -47px}
+.sprite-menu-clefable{background-position:-173px -47px}
+.sprite-menu-clefairy{background-position:-215px -47px}
+.sprite-menu-cloyster{background-position:-257px -47px}
+.sprite-menu-cubone{background-position:-299px -47px}
+.sprite-menu-dewgong{background-position:-341px -47px}
+.sprite-menu-diglett{background-position:-383px -47px}
+.sprite-menu-ditto{background-position:-425px -47px}
+.sprite-menu-dodrio{background-position:-467px -47px}
+.sprite-menu-doduo{background-position:-5px -89px}
+.sprite-menu-dragonair{background-position:-47px -89px}
+.sprite-menu-dragonite{background-position:-89px -89px}
+.sprite-menu-dratini{background-position:-131px -89px}
+.sprite-menu-drowzee{background-position:-173px -89px}
+.sprite-menu-dugtrio{background-position:-215px -89px}
+.sprite-menu-eevee{background-position:-257px -89px}
+.sprite-menu-ekans{background-position:-299px -89px}
+.sprite-menu-electabuzz{background-position:-341px -89px}
+.sprite-menu-electrode{background-position:-383px -89px}
+.sprite-menu-exeggcute{background-position:-425px -89px}
+.sprite-menu-exeggutor{background-position:-467px -89px}
+.sprite-menu-farfetchd{background-position:-5px -131px}
+.sprite-menu-fearow{background-position:-47px -131px}
+.sprite-menu-flareon{background-position:-89px -131px}
+.sprite-menu-gastly{background-position:-131px -131px}
+.sprite-menu-gengar{background-position:-173px -131px}
+.sprite-menu-geodude{background-position:-215px -131px}
+.sprite-menu-gloom{background-position:-257px -131px}
+.sprite-menu-golbat{background-position:-299px -131px}
+.sprite-menu-goldeen{background-position:-341px -131px}
+.sprite-menu-golduck{background-position:-383px -131px}
+.sprite-menu-golem{background-position:-425px -131px}
+.sprite-menu-graveler{background-position:-467px -131px}
+.sprite-menu-grimer{background-position:-5px -173px}
+.sprite-menu-gyarados{background-position:-47px -173px}
+.sprite-menu-haunter{background-position:-89px -173px}
+.sprite-menu-hitmonchan{background-position:-131px -173px}
+.sprite-menu-hitmonlee{background-position:-173px -173px}
+.sprite-menu-horsea{background-position:-215px -173px}
+.sprite-menu-hypno{background-position:-257px -173px}
+.sprite-menu-ivysaur{background-position:-299px -173px}
+.sprite-menu-jigglypuff{background-position:-341px -173px}
+.sprite-menu-jolteon{background-position:-383px -173px}
+.sprite-menu-jynx{background-position:-425px -173px}
+.sprite-menu-kabuto{background-position:-467px -173px}
+.sprite-menu-kabutops{background-position:-5px -215px}
+.sprite-menu-kadabra{background-position:-47px -215px}
+.sprite-menu-kakuna{background-position:-89px -215px}
+.sprite-menu-kangaskhan{background-position:-131px -215px}
+.sprite-menu-kingler{background-position:-173px -215px}
+.sprite-menu-koffing{background-position:-215px -215px}
+.sprite-menu-krabby{background-position:-257px -215px}
+.sprite-menu-lapras{background-position:-299px -215px}
+.sprite-menu-lickitung{background-position:-341px -215px}
+.sprite-menu-machamp{background-position:-383px -215px}
+.sprite-menu-machoke{background-position:-425px -215px}
+.sprite-menu-machop{background-position:-467px -215px}
+.sprite-menu-magikarp{background-position:-5px -257px}
+.sprite-menu-magmar{background-position:-47px -257px}
+.sprite-menu-magnemite{background-position:-89px -257px}
+.sprite-menu-magneton{background-position:-131px -257px}
+.sprite-menu-mankey{background-position:-173px -257px}
+.sprite-menu-marowak{background-position:-215px -257px}
+.sprite-menu-meowth{background-position:-257px -257px}
+.sprite-menu-metapod{background-position:-299px -257px}
+.sprite-menu-mew{background-position:-341px -257px}
+.sprite-menu-mewtwo{background-position:-383px -257px}
+.sprite-menu-moltres{background-position:-425px -257px}
+.sprite-menu-mr-mime{background-position:-467px -257px}
+.sprite-menu-muk{background-position:-5px -299px}
+.sprite-menu-nidoking{background-position:-47px -299px}
+.sprite-menu-nidoqueen{background-position:-89px -299px}
+.sprite-menu-nidoran-f,.sprite-menu-nidoranf{background-position:-131px -299px}
+.sprite-menu-nidoran-m,.sprite-menu-nidoranm{background-position:-173px -299px}
+.sprite-menu-nidorina{background-position:-215px -299px}
+.sprite-menu-nidorino{background-position:-257px -299px}
+.sprite-menu-ninetales{background-position:-299px -299px}
+.sprite-menu-oddish{background-position:-341px -299px}
+.sprite-menu-omanyte{background-position:-383px -299px}
+.sprite-menu-omastar{background-position:-425px -299px}
+.sprite-menu-onix{background-position:-467px -299px}
+.sprite-menu-paras{background-position:-5px -341px}
+.sprite-menu-parasect{background-position:-47px -341px}
+.sprite-menu-persian{background-position:-89px -341px}
+.sprite-menu-pidgeot{background-position:-131px -341px}
+.sprite-menu-pidgeotto{background-position:-173px -341px}
+.sprite-menu-pidgey{background-position:-215px -341px}
+.sprite-menu-pikachu{background-position:-257px -341px}
+.sprite-menu-pinsir{background-position:-299px -341px}
+.sprite-menu-poliwag{background-position:-341px -341px}
+.sprite-menu-poliwhirl{background-position:-383px -341px}
+.sprite-menu-poliwrath{background-position:-425px -341px}
+.sprite-menu-ponyta{background-position:-467px -341px}
+.sprite-menu-porygon{background-position:-5px -383px}
+.sprite-menu-primeape{background-position:-47px -383px}
+.sprite-menu-psyduck{background-position:-89px -383px}
+.sprite-menu-raichu{background-position:-131px -383px}
+.sprite-menu-rapidash{background-position:-173px -383px}
+.sprite-menu-raticate{background-position:-215px -383px}
+.sprite-menu-rattata{background-position:-257px -383px}
+.sprite-menu-rhydon{background-position:-299px -383px}
+.sprite-menu-rhyhorn{background-position:-341px -383px}
+.sprite-menu-sandshrew{background-position:-383px -383px}
+.sprite-menu-sandslash{background-position:-425px -383px}
+.sprite-menu-scyther{background-position:-467px -383px}
+.sprite-menu-seadra{background-position:-5px -425px}
+.sprite-menu-seaking{background-position:-47px -425px}
+.sprite-menu-seel{background-position:-89px -425px}
+.sprite-menu-shellder{background-position:-131px -425px}
+.sprite-menu-slowbro{background-position:-173px -425px}
+.sprite-menu-slowpoke{background-position:-215px -425px}
+.sprite-menu-snorlax{background-position:-257px -425px}
+.sprite-menu-spearow{background-position:-299px -425px}
+.sprite-menu-squirtle{background-position:-341px -425px}
+.sprite-menu-starmie{background-position:-383px -425px}
+.sprite-menu-staryu{background-position:-425px -425px}
+.sprite-menu-tangela{background-position:-467px -425px}
+.sprite-menu-tauros{background-position:-5px -467px}
+.sprite-menu-tentacool{background-position:-47px -467px}
+.sprite-menu-tentacruel{background-position:-89px -467px}
+.sprite-menu-vaporeon{background-position:-131px -467px}
+.sprite-menu-venomoth{background-position:-173px -467px}
+.sprite-menu-venonat{background-position:-215px -467px}
+.sprite-menu-venusaur{background-position:-257px -467px}
+.sprite-menu-victreebel{background-position:-299px -467px}
+.sprite-menu-vileplume{background-position:-341px -467px}
+.sprite-menu-voltorb{background-position:-383px -467px}
+.sprite-menu-vulpix{background-position:-425px -467px}
+.sprite-menu-wartortle{background-position:-467px -467px}
+.sprite-menu-weedle{background-position:-509px -5px}
+.sprite-menu-weepinbell{background-position:-509px -47px}
+.sprite-menu-weezing{background-position:-509px -89px}
+.sprite-menu-wigglytuff{background-position:-509px -131px}
+.sprite-menu-zapdos{background-position:-509px -173px}
+.sprite-menu-zubat{background-position:-509px -215px}
+.sprite-menu-growlithe{background-position:-509px -257px}
+
+.sprite-item {background-image: url('../img/items/spritesheet-gen1.png');background-repeat: no-repeat; display: inline-block;width: 24px;height:24px;vertical-align:middle}
+.sprite-1unknown {background-position: -5px -5px}
+.sprite-amulet-coin {background-position: -39px -5px}
+.sprite-antidote {background-position: -73px -5px}
+.sprite-awakening {background-position: -107px -5px}
+.sprite-basement-key {background-position: -141px -5px}
+.sprite-bicycle {background-position: -175px -5px}
+.sprite-big-nugget {background-position: -209px -5px}
+.sprite-bike {background-position: -243px -5px}
+.sprite-bike-voucher {background-position: -5px -39px}
+.sprite-burn-heal {background-position: -39px -39px}
+.sprite-calcium {background-position: -73px -39px}
+.sprite-carbos {background-position: -107px -39px}
+.sprite-coin-case {background-position: -141px -39px}
+.sprite-dire-hit {background-position: -176px -39px}
+.sprite-dome-fossil {background-position: -210px -39px}
+.sprite-dowsing-machine {background-position: -244px -39px}
+.sprite-dowsing-mchn {background-position: -5px -73px}
+.sprite-elixir {background-position: -39px -73px}
+.sprite-escape-rope {background-position: -73px -73px}
+.sprite-ether {background-position: -107px -73px}
+.sprite-safari-ball {background-position: -141px -73px}
+.sprite-exp-share,.sprite-exp-all {background-position: -176px -73px}
+.sprite-fire-stone {background-position: -210px -73px}
+.sprite-fresh-water {background-position: -244px -73px}
+.sprite-full-heal {background-position: -5px -107px}
+.sprite-full-restore {background-position: -39px -107px}
+.sprite-good-rod {background-position: -73px -107px}
+.sprite-great-ball {background-position: -107px -107px}
+.sprite-guard-spec {background-position: -141px -107px}
+.sprite-helix-fossil {background-position: -175px -107px}
+.sprite-hp-up {background-position: -209px -107px}
+.sprite-hyper-potion {background-position: -243px -107px}
+.sprite-ice-heal {background-position: -5px -141px}
+.sprite-iron {background-position: -39px -141px}
+.sprite-itemfinder {background-position: -73px -141px}
+.sprite-leaf-stone {background-position: -107px -141px}
+.sprite-leftovers {background-position: -141px -141px}
+.sprite-lemonade {background-position: -175px -141px}
+.sprite-lift-key {background-position: -209px -141px}
+.sprite-magnet {background-position: -243px -141px}
+.sprite-master-ball {background-position: -5px -175px}
+.sprite-max-elixir {background-position: -39px -175px}
+.sprite-max-ether {background-position: -73px -175px}
+.sprite-max-potion {background-position: -107px -175px}
+.sprite-max-repel {background-position: -141px -175px}
+.sprite-max-revive {background-position: -175px -175px}
+.sprite-moon-stone {background-position: -209px -175px}
+.sprite-mystery-egg {background-position: -243px -175px}
+.sprite-nevermeltice {background-position: -5px -209px}
+.sprite-nugget {background-position: -39px -209px}
+.sprite-oaks-parcel {background-position: -73px -209px}
+.sprite-old-amber {background-position: -107px -209px}
+.sprite-old-rod {background-position: -141px -209px}
+.sprite-parcel {background-position: -175px -209px}
+.sprite-parlyz-heal {background-position: -209px -209px}
+.sprite-poke-ball {background-position: -243px -209px}
+.sprite-potion {background-position: -5px -243px}
+.sprite-pp-up {background-position: -39px -243px}
+.sprite-protein {background-position: -73px -243px}
+.sprite-rare-candy {background-position: -107px -243px}
+.sprite-revive {background-position: -141px -243px}
+.sprite-ss-anne-ticket,.sprite-ss-ticket {background-position: -175px -243px}
+.sprite-super-potion {background-position: -209px -243px}
+.sprite-super-repel {background-position: -243px -243px}
+.sprite-super-rod {background-position: -277px -5px}
+.sprite-thunder-stone {background-position: -278px -39px}
+.sprite-town-map {background-position: -278px -73px}
+.sprite-ultra-ball {background-position: -277px -107px}
+.sprite-water-stone {background-position: -277px -141px}
+.sprite-x-accuracy {background-position: -277px -175px}
+.sprite-x-attack {background-position: -277px -209px}
+.sprite-x-defend {background-position: -277px -243px}
+.sprite-x-sp-def {background-position: -5px -277px}
+.sprite-x-special {background-position: -39px -277px}
+.sprite-x-speed {background-position: -73px -277px}
+.sprite-zinc {background-position: -107px -277px}
+.sprite-silph-scope {background-position: -141px -277px}
+.sprite-poke-flute {background-position: -175px -277px}
+.sprite-card-key {background-position: -209px -277px}
+.sprite-secret-key {background-position: -242px -277px}
+
+.sprite-trainer {background-image: url('../img/trainers/ar/trainers-spritesheet.png');background-repeat: no-repeat;display: inline-block;width:64px;height:64px}
+.sprite-trainer-agatha {background-position: 0 0}
+.sprite-trainer-blaine {background-position: -64px 0}
+.sprite-trainer-blue,.sprite-trainer-blue-champion {background-position: -128px 0}
+.sprite-trainer-blue-mid {background-position: -192px 0}
+.sprite-trainer-blue-start {background-position: 0 -64px}
+.sprite-trainer-brock {background-position: -64px -64px}
+.sprite-trainer-bruno {background-position: -128px -64px}
+.sprite-trainer-erika {background-position: -192px -64px}
+.sprite-trainer-giovanni {background-position: 0 -128px}
+.sprite-trainer-koga {background-position: -64px -128px}
+.sprite-trainer-lance {background-position: -128px -128px}
+.sprite-trainer-lorelei {background-position: -192px -128px}
+.sprite-trainer-ltsurge {background-position: 0 -192px}
+.sprite-trainer-misty {background-position: -64px -192px}
+.sprite-trainer-red {background-position: -128px -192px}
+.sprite-trainer-red-2 {background-position: -192px -192px}
+.sprite-trainer-sabrina {background-position: -256px 0}
+.sprite-trainer-unknown {background-position: -256px -64px}
+.sprite-trainer-missingno {background-position: -256px -128px}
+.sprite-trainer-thepc {background-position: -256px -192px}

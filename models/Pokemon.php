@@ -12,11 +12,6 @@ class Pokemon extends Model {
 	public $hold_item;
 	public $status;
 
-	public function showSomething() {
-		$cont = new SiteController();
-		echo $cont->actionIndex();
-	}
-
 	public static function getPokemon($where = null, $order = null, $limit = null) {
 		if(!is_null($where)) {
 			$where = ' WHERE ' . $where;
@@ -48,7 +43,7 @@ class Pokemon extends Model {
 				'hold_item' => $newPokemon->setHoldItem($pok['hold_item']),
 				'status' => $pok['status_name'],
 				'comment' => FuncHelp::getDateTime($pok['comment']),
-				'moves' => Move::getMovesForPokemon($pok['moves']),
+				'moves' => $newPokemon->setMoves($pok['moves']),
 			));
 			$newPokemon->setAttributes($newPokemon->getFields());
 
@@ -105,22 +100,41 @@ class Pokemon extends Model {
 	}
 
 	public function setPokeBall($poke_ball) {
-		$item = new Item();
-		$item->setName($poke_ball);
-		return $item;
+		if($poke_ball) {
+			$item = new Item();
+			$item->setName($poke_ball);
+			return $item;
+		}
+		unset($this->poke_ball);
 	}
 
 	public function setGender($gender) {
-		return isset($gender) ? $this->getGender($gender) : null;
+		if($gender) {
+			return $this->getGender($gender);
+		}
+		unset($this->gender);
 	}
 
 	public function setHoldItem($hold_item) {
-		if(!is_null($hold_item)) {
+		if($hold_item) {
 			$item = new Item();
 			$item->setName($hold_item);
 			return $item;
 		}
-		return null;
+		unset($this->hold_item);
+	}
+
+	public function setMoves($moves) {
+		if($moves) {
+			$ex = explode(',', $moves);
+			foreach($ex as $m) {
+				$model = new Move();
+				$model->name = $m;
+				$return[] = $model;
+			}
+			return $return;
+		}
+		unset($this->moves);
 	}
 
 	public static function getPartyPokemon() {

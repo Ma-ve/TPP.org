@@ -1,17 +1,11 @@
 <?php
-$this->render('credit/_general'); ?>
+$this->render('credit/_general');
+foreach(array_chunk($credits, 2) as $credits) { ?>
 
-			<div class="row"><?php
-foreach(array_chunk($credits, ceil(count($credits) / 2)) as $credits) { ?>
-
-				<div class="col-md-6 col-pokemon-milestones">
-					<div class="table-responsive table-bordered table-striped table-pokemon table-milestones">
-						<table class="table"><?php
+						<div class="row credits"><?php
 	$this->render('credit/_info', array('credits' => $credits)); ?>
 
-						</table>
-					</div>
-				</div><?php
-} ?>
-
-			</div>
+						</div><?php
+}
+$this->render('credit/_recruitment');
+$this->render('credit/_thanks');

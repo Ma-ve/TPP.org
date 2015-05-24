@@ -1,4 +1,21 @@
-<!DOCTYPE html>
+<!--
+
+
+
+##############  ##############  ##############        ##############  ##############  ##############
+      ##        ##          ##  ##          ##        ##          ##  ##        ####  ##
+      ##        ##          ##  ##          ##        ##          ##  ##      ###     ##
+      ##        ##          ##  ##          ##        ##          ##  #########       ##    ########
+      ##        ##############  ##############        ##          ##  ##  #####       ##   #########
+      ##        ##              ##              ####  ##          ##  ##    #####     ##          ##
+      ##        ##              ##              ####  ##############  ##      ######  ##############
+
+Checking out the source eh? I'll one-up you:
+See the source at https://github.com/Ma-ve/TPP.org and help us improve :D
+
+
+
+--><!DOCTYPE html>
 <html lang="en">
 	<head>
 		<meta charset="utf-8">
@@ -7,31 +24,32 @@
 		<meta name="author" content="Mave">
 		<link rel="shortcut icon" href="favicon.ico?v2">
 
-		<title>TwitchPlaysPok&eacute;mon / Twitch Plays Pok&eacute;mon - Let's Get Organized!</title><?php /*
+		<title>TwitchPlaysPok&eacute;mon / Twitch Plays Pok&eacute;mon - Let's Get Organized!</title>
 		<link href="css/twitchplayspokemon.css" rel="stylesheet">
 		<link href="css/spritesheets.css" rel="stylesheet">
-		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/grayscale.css" rel="stylesheet">
-		<link href="css/jquery-ui.min.css" rel="stylesheet">*/ ?>
+		<link href="css/jquery-ui.min.css" rel="stylesheet"><?php /*
 
-		<link href="css/minified.css" rel="stylesheet">
+		<link href="css/minified.css" rel="stylesheet">*/ ?>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
 		  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 		  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
-		<script src="//code.jquery.com/jquery-1.10.2.min.js"></script><?php 
-//		<script src="js/bootstrap.min.js"></script>
-//		<script src="js/jquery.plugin.min.js"></script>
-//		<script src="js/jquery.cookie.js"></script><?php
-//		<script src="js/jquery.lazyload.min.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="js/jquery.plugin.min.js"></script>
+		<script src="js/jquery.cookie.js"></script>
+		<script src="js/jquery.lazyload.min.js"></script>
 
-//<!--		<script src="js/jquery-ui.min.js"></script>
-//		<script src="js/twitchplayspokemon.js"></script>--> ?>
+		<script src="js/jquery-ui.min.js"></script>
+		<script src="js/twitchplayspokemon.js"></script><?php /*
 
-		<script src="js/minified.js"></script>
+		<script src="js/minified.js"></script>*/ ?>
 	</head>
 
 	<body id="top">
@@ -51,7 +69,7 @@
 					<ul class="nav navbar-nav navbar-right">
 						<li><a href="https://sites.google.com/site/twitchplayspokemonstatus/" target="_blank">Google Doc</a>
 						<li><a href="http://www.reddit.com/live/uaacu13x0zen/" target="_blank">Reddit Live Updater</a>
-						<li><a href="/" class="tpp-options">Settings</a></li>
+						<!--<li><a href="/" class="tpp-options">Settings</a></li>-->
 					</ul>
 				</div>
 			</div>
@@ -62,11 +80,11 @@
 					<li><a href="#top">Top</a>
 					<li><a href="#pokemon">Pok&eacute;mon [Party]</a>
 					<li><a href="#badges">Badges</a>
-					<li><a href="#box">Box</a>
-					<li><a href="#daycare">Daycare</a>
+					<li><a href="#pokemon-box">Box</a>
+					<li><a href="#pokemon-daycare">Daycare</a>
 					<li><a href="#items">Items</a>
-					<li><a href="#timeline">Timeline [NEW]</a>
-					<li><a href="#history">History</a>
+					<!--<li><a href="#timeline">Timeline [NEW]</a>-->
+					<li><a href="#pokemon-history">History</a>
 					<li><a href="#milestones">Milestones</a>
 					<li><a href="#facts">Facts</a>
 					<li><a href="#credits">Credits [who to thank!]</a>
