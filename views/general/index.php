@@ -1,3 +1,4 @@
+
 			<div class="page-header">
 				<h1>
 					<a href="http://www.twitch.tv/twitchplayspokemon"><!--
@@ -5,18 +6,18 @@
 					--></a><!--
 					--><a href="" class="pop-out btn btn-danger btn-xs"><i class="fa fa-expand"></i>Pop out</a>
 
-					<span class="pull-right last-update">Last update: <?= $this->help->getDateTime($this->general['last_update']['value']); ?></span>
+					<span class="pull-right last-update">Last update: <?= FuncHelp::getDateTime($general->last_update); ?></span>
 				</h1><?php
 	if(!empty($messages)) {
 		$this->render('general/_messages', array('messages' => $messages));
 	} ?>
 
 		<div class="pull-left current-status">
-			<p>Current Goal: <strong><?= utf8_decode($this->general['current_goal']['value']); ?></strong></p>
-			<p>Optional Goal: <strong><?= !empty($this->general['optional_goal']['value']) ? utf8_decode($this->general['optional_goal']['value']) : '-'; ?></strong></p>
-			<p>Current Location: <strong><?= utf8_decode($this->general['current_location']['value']); ?></strong></p>
-			<p>Current Pok&eacute;center: <strong><?= utf8_decode($this->general['current_pokecenter']['value']); ?></strong></p>
-			<p>Money in hand: <strong><img src="/img/items/pokedollar.png" title="Pok&eacute;dollar" alt="Pok&eacute;dollar"><?= $this->general['money']['value']; ?></strong></p>
+			<p>Current Goal: <strong><?= utf8_decode($general->current_goal); ?></strong></p>
+			<p>Optional Goal: <strong><?= !empty($general->optional_goal) ? utf8_decode($general->optional_goal) : '-'; ?></strong></p>
+			<p>Current Location: <strong><?= utf8_decode($general->current_location); ?></strong></p>
+			<p>Current Pok&eacute;center: <strong><?= utf8_decode($general->current_pokecenter); ?></strong></p>
+			<p>Money in hand: <strong><?= Image::toImage('/items', 'pokedollar', array('title' => 'Pok&eacute;dollar', 'title' => 'Pok&eacute;dollar')); ?><?= $general->money; ?></strong></p>
 		</div>
 		<div class="current-info pull-right text-right">
 			<p>Before this, we played Pok&eacute;mon:</p>
@@ -34,4 +35,10 @@
 	<div id="feedback" class="feedback">
 		<textarea class="feedback-form" placeholder="Feedback, suggestions, anything you wish to say, fire away!"></textarea>
 		<button class="btn btn-primary feedback-button">Submit!</button>
-	</div>
+	</div><?php
+	if(isset($general->notices)) {
+		foreach($general->notices as $notice) { ?>
+
+	<div class="alert alert-info"><?= $notice; ?></div><?php
+		}
+	}

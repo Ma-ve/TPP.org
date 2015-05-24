@@ -1,5 +1,5 @@
 <?php
-$this->render('pokemon/_general'); ?>
+$this->render('pokemon/_general', array('owned' => $owned, 'seen' => $seen)); ?>
 
 			<div class="table-responsive table-bordered table-pokemon pokemon-scrollable">
 				<table class="table"><?php

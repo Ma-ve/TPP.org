@@ -1,5 +1,4 @@
 <?php
-
 $time = microtime(true);
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
@@ -11,9 +10,9 @@ new Init();
 
 TPP::initializeConnection(new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE . TWITCHVERSION));
 
-include('views/layouts/header.php');
-$pok = new Pokemon;
-echo $pok->showSomething();
+
+$site = new SiteController();
+$site->actionIndex();
 
 echo '<h1>loaded in ' . round(microtime(true) - $time, 7) . ' secs</h1>';
 exit();

@@ -3,12 +3,13 @@
 					<tr><?php
 foreach($pokemon as $p) { ?>
 
-						<th><?= $p->name; ?><?= isset($p->gender) ? ' ' . $p->gender : ''; ?><?= isset($p->poke_ball) ? ' ' . $p->poke_ball->showImage() : ''; ?>
+						<td>
+							<strong><?= $p->name; ?><?= isset($p->gender) ? ' ' . $p->gender : ''; ?><?= isset($p->poke_ball) ? ' ' . $p->poke_ball->showImage() : ''; ?></strong>
 
 							<br>
 							<small class="pokemon-name">
 								<em><?= $p->pokemon ?></em>
-								<span><?= isset($p->is_shiny) ? ' <img src="/img/misc/shiny.png" title="Shiny Pok&eacute;mon" alt="Shiny Pok&eacute;mon">' : ''; ?></span><!--<?php if(isset($p->type1)) { ?>
+								<span><?= isset($p->is_shiny) ? Image::toImage('/misc', 'shiny', array('title' => 'Shiny Pok&eacute;mon', 'alt' => 'Shiny Pok&eacute;mon')) : ''; ?></span><!--<?php if(isset($p->type1)) { ?>
 
 								--><span class="circle <?= strtolower($p->type1); ?> tpp-tooltip" data-content="<?= $p->type1; ?>"></span><!--<?php
 							} if(isset($p->type2)) { ?>
@@ -19,7 +20,7 @@ foreach($pokemon as $p) { ?>
 							--></small>
 
 
-						</th><?php
+						</td><?php
 } ?>
 
 					</tr>

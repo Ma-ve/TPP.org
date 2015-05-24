@@ -8,7 +8,8 @@ Issues:
 * CSS
 * Images (to sprites)
 * Boxes
-* Credits
+* --Credits--
 * Timeline
 * Javascript
-* Settings (make the switch to mimo.30.nl)
+* --Settings (make the switch to mimo.30.nl)--
+* Minify script (improve old)

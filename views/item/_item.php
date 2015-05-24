@@ -9,7 +9,7 @@ foreach($items as $type => $items) { ?>
 						<li>
 							<span><?= $item->showImage(); ?></span>
 							<span><?= $item->name; ?></span><?=
-							$item->amount > 0 ? '<span> &times; ' . $item->amount . '</span>' : ''; ?></li><?php
+							isset($item->amount) && $item->amount > 0 ? '<span> &times; ' . $item->amount . '</span>' : ''; ?></li><?php
 	} ?>
 
 					</ul>
