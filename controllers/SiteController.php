@@ -2,12 +2,10 @@
 
 class SiteController extends Controller {
 
-	//a
 
 	public function actionIndex() {
-		$messages = $this->getMessages();
 		$this->render('general/index', array(
-			'messages' => $messages
+			'messages' => $this->getMessages()
 		));
 
 		$this->render('pokemon/index', array(
@@ -26,12 +24,24 @@ class SiteController extends Controller {
 			'pokemon' => Pokemon::getDaycarePokemon()
 		));
 
-//		$this->render('item/index', array(
-//			'items' => Item::getAllItems()
-//		));
+		$this->render('item/index', array(
+			'items' => Item::getAllItems()
+		));
 
 		$this->render('pokemon_history/index', array(
 			'pokemon' => Pokemon::getHistoryPokemon()
+		));
+
+		$this->render('milestone/index', array(
+			'milestones' => Milestone::getMilestones()
+		));
+
+		$this->render('fact/index', array(
+			'facts' => Fact::getFacts()
+		));
+
+		$this->render('credit/index', array(
+			'credits' => Credit::getCredits()
 		));
 	}
 

@@ -10,6 +10,7 @@ class Pokemon extends Model {
 	public $poke_ball;
 	public $gender;
 	public $hold_item;
+	public $status;
 
 	public function showSomething() {
 		$cont = new SiteController();
@@ -24,7 +25,16 @@ class Pokemon extends Model {
 		} if(!is_null($limit)) {
 			$limit = ' LIMIT ' . $limit;
 		}
-		$getPokemon = TPP::db()->query("SELECT * FROM `pokemon`" . $where . $order . $limit) or die(TPP::db()->error);
+		$getPokemon = TPP::db()->query("SELECT
+			p.`id`, p.`pokemon`, p.`name`, p.`level`, p.`nickname`, p.`gender`, p.`hold_item`, p.`status`, p.`box_id`, p.`poke_ball`, p.`comment`,
+			GROUP_CONCAT(DISTINCT m.`name` SEPARATOR ',') as `moves`,
+			s.`status` as `status_name`
+			FROM `pokemon` p
+			LEFT JOIN `move` m
+			ON m.`pokemon` = p.`id`
+			JOIN `status` s
+			ON s.`id` = p.`status`
+			" . $where . " GROUP BY p.`id`" . $order . $limit) or die(TPP::db()->error);
 		while($pok = $getPokemon->fetch_assoc()) {
 			$newPokemon = new self();
 			$newPokemon->setAttributes(array(
@@ -36,7 +46,9 @@ class Pokemon extends Model {
 				'poke_ball' => $newPokemon->setPokeBall($pok['poke_ball']),
 				'gender' => $newPokemon->setGender($pok['gender']),
 				'hold_item' => $newPokemon->setHoldItem($pok['hold_item']),
-				'moves' => Move::getMovesForPokemon($pok['id']),
+				'status' => $pok['status_name'],
+				'comment' => FuncHelp::getDateTime($pok['comment']),
+				'moves' => Move::getMovesForPokemon($pok['moves']),
 			));
 			$newPokemon->setAttributes($newPokemon->getFields());
 
@@ -112,19 +124,19 @@ class Pokemon extends Model {
 	}
 
 	public static function getPartyPokemon() {
-		return Pokemon::getPokemon('`status` = 1', `party_order`, '6');
+		return Pokemon::getPokemon('p.`status` = 1', `party_order`, '6');
 	}
 
 	public static function getBoxPokemon() {
-		return Pokemon::getPokemon('`status` = 2', '`id` DESC');
+		return Pokemon::getPokemon('p.`status` = 2', '`id` DESC');
 	}
 
 	public static function getDaycarePokemon() {
-		return Pokemon::getPokemon('`status` = 6', '`id` DESC');
+		return Pokemon::getPokemon('p.`status` = 6', '`id` DESC');
 	}
 
 	public static function getHistoryPokemon() {
-		return Pokemon::getPokemon('`status` NOT IN(1,2,6,9)', '`comment` DESC');
+		return Pokemon::getPokemon('p.`status` NOT IN(1,2,6,9)', '`comment` DESC');
 	}
 
 	private function getGender($g) {
@@ -189,4 +201,16 @@ class Pokemon extends Model {
 		return $return;
 	}
 
+	public function getHistoryStatusText() {
+		switch($this->status) {
+			case 'Traded': return 'for';
+			case 'Evolved': return 'into';
+			case 'Hatched': return 'into';
+			default: return null;
+		}
+	}
+
+	public function getHistoryColour() {
+		return strtolower($this->status);
+	}
 }
