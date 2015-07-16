@@ -8,7 +8,7 @@ foreach($pokemon as $p) {
 							<div class="padding8">
 								<p class="pokemon-img-container relative w<?= !is_null($size) ? $size : '150'; ?> h<?= !is_null($size) ? $size : '150'; ?>" data-identifier="<?= $p->id; ?>">
 									<?= $p->showImage(array(), $size);
-									?><?= is_null($size) ? $p->showMenuImage(array('class' => 'pokemon-sprite')) : ''; ?>
+									?><?php /* is_null($size) ? $p->showMenuImage(array('class' => 'pokemon-sprite')) : ''; */ ?>
 
 								</p>
 							</div>

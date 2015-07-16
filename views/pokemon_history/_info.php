@@ -15,9 +15,11 @@ foreach($pokemon as $p) { ?>
 								<td style="height: 100px; line-height: 14px;">
 									<ul class="pokemon-moves text-left">
 										<li><strong>Level <?= $p->level; ?></strong></li><?php
-	foreach($p->moves as $move) { ?>
+	if(isset($p->moves)) {
+		foreach($p->moves as $move) { ?>
 										
 										<li><small><?= $move->name; ?></small></li><?php
+		}
 	} ?>
 
 									</ul>

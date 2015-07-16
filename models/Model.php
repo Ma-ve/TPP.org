@@ -5,8 +5,8 @@ class Model {
 	public function setAttributes($attributes) {
 		foreach($attributes as $key => $value) {
 			if($value != '') { 
-				$key = gettype($key) === 'string' ? stripslashes(utf8_encode($key)) : $key;
-				$this->$key = gettype($value) === 'string' ? stripslashes(utf8_encode($value)) : $value;
+				$key = gettype($key) === 'string' ? FuncHelp::utf8ify($key) : $key;
+				$this->$key = gettype($value) === 'string' ? FuncHelp::utf8ify($value) : $value;
 			}
 		}
 	}

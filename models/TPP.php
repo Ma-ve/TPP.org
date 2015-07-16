@@ -15,7 +15,11 @@ class TPP {
 
 	public static function initializeConnection($connectionInfo) {
 		$db = self::getInstance();
-		$db->db_connection = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE . TWITCHVERSION);
+		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE . TWITCHVERSION);
+		if(!$mysqli->set_charset('utf8')) {
+			die('Could not set database charset to utf8');
+		}
+		$db->db_connection = $mysqli;
 	}
 
 	public static function db() {

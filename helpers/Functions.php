@@ -61,10 +61,10 @@ class FuncHelp {
 						), array(
 			'_',
 			'',
+			'e',
+			'-',
 			'',
-			'_',
-			'',
-			'',
+			'e',
 						), $name)
 		);
 	}
@@ -77,8 +77,12 @@ class FuncHelp {
 			'Strength',
 			'Flash',
 			'Whirlpool',
-			'Waterfall'			
+			'Waterfall'
 		);
+	}
+
+	public static function utf8ify($s) {
+		return iconv(mb_detect_encoding($s, mb_detect_order(), true), "UTF-8", $s);
 	}
 
 }
