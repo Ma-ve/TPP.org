@@ -4,6 +4,8 @@ TwitchPlaysPokemon
 
 Source code for http://twitchplayspokemon.org/
 
+See https://www.reddit.com/r/twitchplayspokemon/comments/3754i1/developers_tpporg_is_calling_for_you_ive_rebuilt/ for instructions on how to run it locally
+
 Issues:
 * CSS
 * Images (to sprites)
