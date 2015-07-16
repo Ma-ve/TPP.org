@@ -1,12 +1,15 @@
 <?php
 $time = microtime(true);
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
-
 prioIncludes();
 includes();
 
 new Init();
+
+if(TPP_DEBUG) {
+	error_reporting(E_ALL);
+	ini_set('display_errors', 1);
+	set_error_handler("exception_error_handler", E_ALL);
+}
 
 TPP::initializeConnection(new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE . TWITCHVERSION));
 
@@ -20,6 +23,9 @@ exit();
 function prioIncludes() {
 
 	$priorityIncludes = array(
+		'helpers' => array(
+			'ErrorHandler',
+		),
 		'controllers' => array(
 			'Controller',
 		),

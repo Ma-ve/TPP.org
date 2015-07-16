@@ -84,11 +84,13 @@ class Pokemon extends Model {
 	}
 
 	public function setName($name, $pokemon) {
-		return !empty($name) ? str_replace(array(' ', '\Pk'), array('&nbsp;', '<img src="/img/pk.png" title="" alt="">'), stripslashes(utf8_encode($name))) : utf8_encode($pokemon);
+		return !empty($name)
+		? str_replace(array(' ', '\Pk'), array('&nbsp;', '<img src="/img/pk.png" title="" alt="">'), stripslashes(FuncHelp::utf8ify($name)))
+		: FuncHelp::utf8ify($pokemon);
 	}
 
 	public function setPokemon($pokemon) {
-		return utf8_encode($pokemon);
+		return FuncHelp::utf8ify($pokemon);
 	}
 
 	public function setLevel($level) {
@@ -154,16 +156,18 @@ class Pokemon extends Model {
 	}
 
 	private function getGender($g) {
-		if(isset($g[0])) {
-			$return = ' <span class="gender">(&#979';
-			switch($g[0]) {
+		return $g;
+	}
+
+	public function beautifyGender() {
+		if(isset($this->gender)) {
+			switch($this->gender) {
 				case 'm': $return .= '4';
 					break;
 				case 'f': $return .= '2';
 					break;
 			}
-
-			return $return . ';)</span>';
+			return ' <span class="gender">(&#979' . $return . ';)</span>';
 		}
 		return null;
 	}
@@ -171,7 +175,12 @@ class Pokemon extends Model {
 	public function showImage($htmlOptions = array(), $size = null) {
 		$path = '/pokemon';
 		$path .= !is_null($size) ? '/80' : '';
-		return parent::image($path, $this->pokemon, $htmlOptions);
+		$pokemon = $this->pokemon;
+
+		if($pokemon == 'Jellicent' && $this->gender == 'f') {
+			$pokemon = 'Jellicent-Female';
+		}
+		return parent::image($path, $pokemon, $htmlOptions);
 	}
 
 	public function showMenuImage($htmlOptions = array()) {
@@ -226,5 +235,13 @@ class Pokemon extends Model {
 
 	public function getHistoryColour() {
 		return strtolower($this->status);
+	}
+
+	public function getAbilityDescription() {
+		return $this->ability;
+	}
+
+	public function getNatureDescription() {
+		return $this->nature;
 	}
 }
