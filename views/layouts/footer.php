@@ -26,5 +26,3 @@
 		</script>
 	</body>
 </html>
-<!-- Page loaded in <?= round(microtime(true) - $startMicro, 4); ?> secs. --><?php //Page cached on <?= date("Y-m-d H:i:s", time());
-//	file_put_contents('cached.html', ob_get_contents());

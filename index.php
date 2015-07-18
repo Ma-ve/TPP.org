@@ -13,7 +13,6 @@ if(TPP_DEBUG) {
 
 TPP::initializeConnection(new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE . TWITCHVERSION));
 
-
 $site = new SiteController();
 $site->actionIndex();
 

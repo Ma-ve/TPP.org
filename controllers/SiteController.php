@@ -9,45 +9,45 @@ class SiteController extends Controller {
 		$this->render('general/index', array(
 			'general' => $this->getGeneral(),
 			'messages' => $this->getMessages(),
-		));
+		), true);
 
 		$this->render('pokemon/index', array(
 			'pokemon' => Pokemon::getPartyPokemon(),
 			'owned' => $this->getGeneral()->pokedex_owned,
 			'seen' => $this->getGeneral()->pokedex_seen
-		));
+		), true);
 
 		$this->render('badge/index', array(
 			'badges' => Badge::getBadges(null, 'LIMIT 0, 8')
-		));
+		), true);
 
 		$this->render('pokemon_box/index', array(
 			'pokemon' => Pokemon::getBoxPokemon()
-		));
+		), true);
 
 		$this->render('pokemon_daycare/index', array(
 			'pokemon' => Pokemon::getDaycarePokemon()
-		));
+		), true);
 
 		$this->render('item/index', array(
 			'items' => Item::getAllItems()
-		));
+		), true);
 
 		$this->render('pokemon_history/index', array(
 			'pokemon' => Pokemon::getHistoryPokemon()
-		));
+		), true);
 
 		$this->render('milestone/index', array(
 			'milestones' => Milestone::getMilestones()
-		));
+		), true);
 
 		$this->render('fact/index', array(
 			'facts' => Fact::getFacts()
-		));
+		), true);
 
 		$this->render('credit/index', array(
 			'credits' => Credit::getCredits()
-		));
+		), true);
 
 		$this->render('layouts/footer');
 	}

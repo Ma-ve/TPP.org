@@ -119,7 +119,7 @@ class Credit extends Model {
 			case 9: return 'Pok&eacute;mon X';
 			case 10: return 'Pok&eacute;mon Omega Ruby';
 			case 11: return 'Pok&eacute;mon Red [Anniversary!]';
-			default: return $i;
+			default: return $integer;
 		}
 }
 
