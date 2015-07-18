@@ -6,7 +6,7 @@
 class FuncHelp {
 
 	public static function getDateTime($time, $secs = false) {
-		$startTime = 1423771200;
+		$startTime = TPP_START_TIME;
 		if(is_numeric($time)) {
 			$getTime = $time - $startTime;
 			if($getTime > 0) {
