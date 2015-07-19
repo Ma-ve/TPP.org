@@ -88,7 +88,7 @@ See the source at https://github.com/Ma-ve/TPP.org and help us improve :D
 						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-item">Items</a></li>
 						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-pokemon-history">Pok&eacute;mon History</a></li>
 						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-milestone">Milestones</a></li>
-						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-fact">Facts</a></li>
+						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-fact">Facts</a></li>
 						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-credit">Credits</a></li>
 						<!--<li><a href="/" class="tpp-options">Settings</a></li>-->
 					</ul>
