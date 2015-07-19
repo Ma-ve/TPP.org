@@ -4,7 +4,7 @@
 foreach($pokemon as $p) { ?>
 
 						<td>
-							<strong><?= $p->name; ?><?= isset($p->gender) ? ' ' . $p->gender : ''; ?><?= isset($p->poke_ball) ? ' ' . $p->poke_ball->showImage() : ''; ?></strong>
+							<strong><?= $p->name; ?><?= isset($p->gender) ? ' ' . $p->BeautifyGender($p->gender) : ''; ?><?= isset($p->poke_ball) ? ' ' . $p->poke_ball->showImage() : ''; ?></strong>
 
 							<br>
 							<small class="pokemon-name">

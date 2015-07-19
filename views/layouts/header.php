@@ -24,16 +24,19 @@ See the source at https://github.com/Ma-ve/TPP.org and help us improve :D
 		<meta name="author" content="Mave">
 		<link rel="shortcut icon" href="favicon.ico?v2">
 
-		<title>TwitchPlaysPok&eacute;mon / Twitch Plays Pok&eacute;mon - Let's Get Organized!</title>
+		<title>TwitchPlaysPok&eacute;mon / Twitch Plays Pok&eacute;mon - Let's Get Organized!</title><?php
+		if(TPP_DEBUG) { ?>
+
 		<link href="css/twitchplayspokemon.css" rel="stylesheet">
 		<link href="css/spritesheets.css" rel="stylesheet">
-		<!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/grayscale.css" rel="stylesheet">
-		<link href="css/jquery-ui.min.css" rel="stylesheet"><?php /*
+		<link href="css/jquery-ui.min.css" rel="stylesheet"><?php
+		} else { ?>
 
-		<link href="css/minified.css" rel="stylesheet">*/ ?>
+		<link href="css/minified.css" rel="stylesheet"><?php
+		} ?>
 
 		<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 		<!--[if lt IE 9]>
@@ -41,22 +44,29 @@ See the source at https://github.com/Ma-ve/TPP.org and help us improve :D
 		  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 		<![endif]-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script><?php
+		if(TPP_DEBUG) { ?>
 		<script src="js/jquery.plugin.min.js"></script>
 		<script src="js/jquery.cookie.js"></script>
 		<script src="js/jquery.lazyload.min.js"></script>
+		<script src="js/hammer.min.js"></script>
+		<script src="js/jquery.mmenu.min.js"></script>
+		<script src="js/jquery.mmenu.dragopen.min.js"></script>
 
 		<script src="js/jquery-ui.min.js"></script>
-		<script src="js/twitchplayspokemon.js"></script><?php /*
+		<script src="js/twitchplayspokemon.js"></script><?php
+		} else { ?>
 
-		<script src="js/minified.js"></script>*/ ?>
+		<script src="js/minified.js"></script><?php
+		} ?>
+
 	</head>
 
-	<body id="top">
+	<body id="top"><!--
 		<a href="https://github.com/Ma-ve/TPP.org">
 			<img style="position: absolute; top: 0; right: 0; border: 0; z-index: 99999;" src="https://camo.githubusercontent.com/652c5b9acfaddf3a9c326fa6bde407b87f7be0f4/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6f72616e67655f6666373630302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png">
-		</a>
-		<nav class="navbar navbar-default navbar-static-top navbar-pokemon" role="navigation">
+		</a>-->
+		<nav class="navbar navbar-default navbar-fixed-top navbar-pokemon" role="navigation">
 			<div class="container-fluid container">
 				<div class="navbar-header">
 					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
@@ -70,14 +80,22 @@ See the source at https://github.com/Ma-ve/TPP.org and help us improve :D
 
 				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 					<ul class="nav navbar-nav navbar-right">
-						<li><a href="https://sites.google.com/site/twitchplayspokemonstatus/" target="_blank">Google Doc</a>
-						<li><a href="http://www.reddit.com/live/uaacu13x0zen/" target="_blank">Reddit Live Updater</a>
+						<li class="non-tpp-app"><a href="https://sites.google.com/site/twitchplayspokemonstatus/" target="_blank">Google Doc</a></li>
+						<li class="non-tpp-app"><a href="http://www.reddit.com/live/uaacu13x0zen/" target="_blank">Reddit Live Updater</a></li>
+						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-badge">Badges</a></li>
+						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-pokemon-box">Pok&eacute;mon in Boxes</a></li>
+						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-pokemon-daycare">Pok&eacute;mon in Daycare</a></li>
+						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-item">Items</a></li>
+						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-pokemon-history">Pok&eacute;mon History</a></li>
+						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-milestone">Milestones</a></li>
+						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-fact">Facts</a></li>
+						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-credit">Credits</a></li>
 						<!--<li><a href="/" class="tpp-options">Settings</a></li>-->
 					</ul>
 				</div>
 			</div>
 		</nav>
-		<div class="container">
+		<div class="container tpp-container">
 			<div class="pokemon-menu">
 				<ul>
 					<li><a href="#top">Top</a>

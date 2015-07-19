@@ -1,8 +1,8 @@
-<?php
+			<div class="tpp-app tpp-app-pokemon-party"><?php
 $this->render('pokemon/_general', array('owned' => $owned, 'seen' => $seen)); ?>
 
-			<div class="table-responsive table-bordered table-pokemon pokemon-scrollable">
-				<table class="table"><?php
+				<div class="table-responsive table-bordered table-pokemon pokemon-scrollable">
+					<table class="table"><?php
 $this->render('pokemon/_info', array('pokemon' => $pokemon));
 $this->render('pokemon/_image', array('pokemon' => $pokemon));
 $this->render('pokemon/_level', array('pokemon' => $pokemon));
@@ -15,5 +15,6 @@ $this->render('pokemon/_characteristic', array('pokemon' => $pokemon));
 $this->render('pokemon/_next_move', array('pokemon' => $pokemon));
 $this->render('pokemon/_evolution', array('pokemon' => $pokemon)); ?>
 
-				</table>
+					</table>
+				</div>
 			</div>

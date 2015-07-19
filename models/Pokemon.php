@@ -162,10 +162,12 @@ class Pokemon extends Model {
 	public function beautifyGender() {
 		if(isset($this->gender)) {
 			switch($this->gender) {
-				case 'm': $return .= '4';
+				case 'm': $return = '4';
 					break;
-				case 'f': $return .= '2';
+				case 'f': $return = '2';
 					break;
+				default: 
+					return '';
 			}
 			return ' <span class="gender">(&#979' . $return . ';)</span>';
 		}
