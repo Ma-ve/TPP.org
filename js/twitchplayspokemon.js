@@ -230,7 +230,8 @@ $(function() {
 	
 	$('.tpp-app-nav a').on('click', function(e) {
 		e.preventDefault();
-		$(".navbar-toggle").click(); //bootstrap 3.x by Richard
+		window.scrollTo(0,0);
+		$(".navbar-toggle").click();
 		$('.tpp-app').addClass('tpp-app-hidden');
 		$('.' + $(this).attr('data-show')).removeClass('tpp-app-hidden');
 	});
