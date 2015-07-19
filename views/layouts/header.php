@@ -79,6 +79,8 @@ See the source at https://github.com/Ma-ve/TPP.org and help us improve :D
 					<ul class="nav navbar-nav navbar-right">
 						<li class="non-tpp-app"><a href="https://sites.google.com/site/twitchplayspokemonstatus/" target="_blank">Google Doc</a></li>
 						<li class="non-tpp-app"><a href="http://www.reddit.com/live/uaacu13x0zen/" target="_blank">Reddit Live Updater</a></li>
+						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-header">General info</a></li>
+						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-pokemon-party">Pok&eacute;mon in Party</a></li>
 						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-badge">Badges</a></li>
 						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-pokemon-box">Pok&eacute;mon in Boxes</a></li>
 						<li class="tpp-app-nav"><a href="#" data-toggle="collapse" data-target=".nav-collapse" data-show="tpp-app-pokemon-daycare">Pok&eacute;mon in Daycare</a></li>

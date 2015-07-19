@@ -1,7 +1,7 @@
 			<div class="tpp-app tpp-app-pokemon-party"><?php
 $this->render('pokemon/_general', array('owned' => $owned, 'seen' => $seen)); ?>
 
-				<div class="table-responsive table-bordered table-pokemon pokemon-scrollable">
+				<div class="table-responsive table-bordered table-pokemon pokemon-scrollable" id="table-pokemon">
 					<table class="table"><?php
 $this->render('pokemon/_info', array('pokemon' => $pokemon));
 $this->render('pokemon/_image', array('pokemon' => $pokemon));
