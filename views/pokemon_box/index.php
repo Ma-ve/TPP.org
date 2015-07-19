@@ -1,8 +1,9 @@
-<?php
+
+			<div class="tpp-app tpp-app-pokemon-box tpp-app-hidden"><?php
 $this->render('pokemon_box/_general', array('count' => count($pokemon))); ?>
 
-			<div class="table-responsive table-bordered table-pokemon pokemon-scrollable mtop20 tr-margin10">
-				<table class="table"><?php
+				<div class="table-responsive table-bordered table-pokemon pokemon-scrollable mtop20 tr-margin10">
+					<table class="table"><?php
 $chunk = array_chunk($pokemon, 6);
 foreach($chunk as $pokemon) {
 
@@ -13,5 +14,6 @@ foreach($chunk as $pokemon) {
 	$this->render('pokemon/_moves', array('pokemon' => $pokemon));
 } ?>
 
-				</table>
+					</table>
+				</div>
 			</div>

@@ -151,11 +151,21 @@ div.table-responsive.pokemon-scrollable {
 	list-style-type: none;
 }
 
-@media(min-width: 1376px) {
+@media (min-width: 1376px) {
 	.pokemon-menu { display: initial; }
 }
 
-@media(max-width: 767px) {
+@media (min-width: 768px) {
+	.tpp-app-nav {
+		display: none !important;
+	}
+}
+
+@media (max-width: 767px) {
+	.non-tpp-app {
+		display: none !important;
+	}
+
 	.page-header .last-update,
 	.page-header .more-info {
 		display: block;
@@ -705,7 +715,7 @@ table.e4-moves td {
 	background-color: #555 !important;
 	border-color: #000;
 	opacity: 1;
-	
+
 }
 
 .mave-history .sprite-menu,
@@ -732,4 +742,14 @@ table.e4-moves td {
 	border-radius: 2px;
 	color: #fff;
 	padding: 2px 4px;
+}
+
+.tpp-container {
+	padding-top: 40px;
+}
+
+.tpp-app {}
+
+.tpp-app-hidden {
+	display: none;
 }

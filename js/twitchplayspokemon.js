@@ -16,7 +16,7 @@ function toggleIcon(s) {
 		$(selector).removeClass('fa-caret-right');
 		$(selector).addClass('fa-caret-down');
 		for(var i = 0; i < others.length; i++) {
-			if(others[i] !== s)  {
+			if(others[i] !== s) {
 				$('.' + others[i] + ' i').removeClass('fa-caret-down');
 				$('.' + others[i] + ' i').addClass('fa-caret-right');
 			}
@@ -27,10 +27,19 @@ function toggleIcon(s) {
 	}
 }
 
-$(document).ready(function() {
-	if($.cookie('more_info') == 1) { $('.pokemon-more-info').show(); $('.pokemon-more-info-click').text('-'); }
-	if($.cookie('more_info_badges') == 1) { $('.badges-more-info').show(); $('.badges-more-info-click').text('-'); }
-	if($.cookie('rematch_more_info_badges') == 1) { $('.rematch-badges-more-info').show(); $('.rematch-badges-more-info-click').text('-'); }
+$(function() {
+	if($.cookie('more_info') == 1) {
+		$('.pokemon-more-info').show();
+		$('.pokemon-more-info-click').text('-');
+	}
+	if($.cookie('more_info_badges') == 1) {
+		$('.badges-more-info').show();
+		$('.badges-more-info-click').text('-');
+	}
+	if($.cookie('rematch_more_info_badges') == 1) {
+		$('.rematch-badges-more-info').show();
+		$('.rematch-badges-more-info-click').text('-');
+	}
 	$('.tpp-options').on('click', function(e) {
 		e.preventDefault();
 		$('#dialog-modal').dialog({
@@ -136,16 +145,16 @@ $(document).ready(function() {
 			document.cookie = 'rematch_more_info_badges=0; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
 		}
 	});
-	
+
 	$('.feedback-button').on('click', function(e) {
 		e.preventDefault();
 		$.post("feedback.php", {
 			feedback: $('.feedback-form').val()
 		})
-		.done(function(data) {
-			$('.feedback').empty();
-			$('.feedback').append('<div class="alert alert-' + alertType(data) + ' feedback-alert">' + data + '</div>');
-		});
+				.done(function(data) {
+					$('.feedback').empty();
+					$('.feedback').append('<div class="alert alert-' + alertType(data) + ' feedback-alert">' + data + '</div>');
+				});
 	});
 
 	$('.join-button').on('click', function(e) {
@@ -153,10 +162,10 @@ $(document).ready(function() {
 		$.post("join_us.php", {
 			join: $('.join-form').val()
 		})
-		.done(function(data) {
-			$('.join').empty();
-			$('.join').append('<div class="alert alert-' + alertType(data) + ' feedback-alert">' + data + '</div>');
-		});
+				.done(function(data) {
+					$('.join').empty();
+					$('.join').append('<div class="alert alert-' + alertType(data) + ' feedback-alert">' + data + '</div>');
+				});
 	});
 
 	$('.alert-recruit').on('click', function() {
@@ -189,28 +198,20 @@ $(document).ready(function() {
 		$('div.join').slideToggle(200, 'linear');
 	});
 
-
-	$('a[href*=#]').on('click', function(event){
-		$('html,body').animate({scrollTop:$(this.hash).offset().top}, 200);
+	$('a[href*=#]').on('click', function(event) {
+		$('html,body').animate({scrollTop: $(this.hash).offset().top}, 200);
 	});
 
 	$('.pop-out').on('click', function(e) {
 		e.preventDefault();
-		window.open('embed','Twitch.tv | Twitch Plays Pokémon','height=400,width=640');
+		window.open('embed', 'Twitch.tv | Twitch Plays Pokémon', 'height=400,width=640');
 	});
-
-
 
 	$('.pop-pokedex').on('click', function(e) {
 		e.preventDefault();
-		window.open('pokedex','Twitch Plays Pok&eacute;mon - Pok&eacute;dex','height=600,width=500,resizable=yes,scrollbars=yes');
+		window.open('pokedex', 'Twitch Plays Pok&eacute;mon - Pok&eacute;dex', 'height=600,width=500,resizable=yes,scrollbars=yes');
 	});
 
-//	$('.mave-history').hover(function() {
-//		$('.mave-history-' + $(this).attr('data-id')).addClass('mave-history-hover');
-//	}, function() {
-//		$('.mave-history-' + $(this).attr('data-id')).removeClass('mave-history-hover');
-//	});
 	$('.mave-history').on('click', function() {
 		$('.mave-history').removeClass('mave-history-hover');
 		$('.mave-history-' + $(this).attr('data-id')).addClass('mave-history-hover');
@@ -222,4 +223,15 @@ $(document).ready(function() {
 	$("#timeline-click").on('click', function(data) {
 		$.post('timeline_click.php', {uniqid: $("#timeline-identifier").val()});
 	});
+
+	if($(window).width() > 1400) {
+		$('.tpp-app').removeClass('tpp-app-hidden');
+	}
+	$('.tpp-app-nav a').on('click', function(e) {
+		e.preventDefault();
+		$(".navbar-toggle").click() //bootstrap 3.x by Richard
+		$('.tpp-app').addClass('tpp-app-hidden');
+		$('.' + $(this).attr('data-show')).removeClass('tpp-app-hidden');
+	});
+
 });
