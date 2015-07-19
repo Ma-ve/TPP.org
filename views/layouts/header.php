@@ -49,9 +49,6 @@ See the source at https://github.com/Ma-ve/TPP.org and help us improve :D
 		<script src="js/jquery.plugin.min.js"></script>
 		<script src="js/jquery.cookie.js"></script>
 		<script src="js/jquery.lazyload.min.js"></script>
-		<script src="js/hammer.min.js"></script>
-		<script src="js/jquery.mmenu.min.js"></script>
-		<script src="js/jquery.mmenu.dragopen.min.js"></script>
 
 		<script src="js/jquery-ui.min.js"></script>
 		<script src="js/twitchplayspokemon.js"></script><?php

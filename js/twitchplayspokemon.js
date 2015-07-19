@@ -198,9 +198,9 @@ $(function() {
 		$('div.join').slideToggle(200, 'linear');
 	});
 
-	$('a[href*=#]').on('click', function(event) {
-		$('html,body').animate({scrollTop: $(this.hash).offset().top}, 200);
-	});
+//	$('a[href*=#]').on('click', function(event) {
+//		$('html,body').animate({scrollTop: $(this.hash).offset().top}, 200);
+//	});
 
 	$('.pop-out').on('click', function(e) {
 		e.preventDefault();
@@ -227,11 +227,13 @@ $(function() {
 	if($(window).width() > 1400) {
 		$('.tpp-app').removeClass('tpp-app-hidden');
 	}
+	
 	$('.tpp-app-nav a').on('click', function(e) {
 		e.preventDefault();
-		$(".navbar-toggle").click() //bootstrap 3.x by Richard
+		$(".navbar-toggle").click(); //bootstrap 3.x by Richard
 		$('.tpp-app').addClass('tpp-app-hidden');
 		$('.' + $(this).attr('data-show')).removeClass('tpp-app-hidden');
 	});
 
 });
+
