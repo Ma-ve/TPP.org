@@ -695,6 +695,7 @@ table.e4-moves td {
 .history-released { background-color: #f9d6d6; }
 .history-evolved { background-color: #e8fcd6; }
 .history-traded { background-color: #c9e5f2; }
+.history-hatched { background-color: #fcfcd6; }
 
 .mave-history {
 	border: 2px solid transparent;
@@ -732,6 +733,7 @@ table.e4-moves td {
 
 .mave-history.history-evolved { background-color: #367c36; }
 .mave-history.history-traded { background-color: #5bc0de; }
+.mave-history.history-hatched { background-color: #cacc4c; }
 
 .pokemon-history-row .pokemon-moves li:not(:first-child) {
 	font-size: 0.85em;
