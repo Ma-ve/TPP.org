@@ -194,6 +194,10 @@ class Pokemon extends Model {
 	}
 
 	public function getNicknames() {
+		if($this->nickname == '') {
+			return '<em>No nickname</em>';
+		}
+
 		$return = '';
 		$array = explode('%', $this->nickname);
 		$i = 0;
@@ -245,5 +249,9 @@ class Pokemon extends Model {
 
 	public function getNatureDescription() {
 		return $this->nature;
+	}
+
+	public function getCharacteristicDescription() {
+		return $this->characteristic;
 	}
 }

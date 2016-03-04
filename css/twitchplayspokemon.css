@@ -487,13 +487,17 @@ table.e4-moves td {
 	color: #fff;
 	cursor: default;
 	display: inline-block;
-	margin-right: 4px;
 	margin-top: 6px;
 	text-align: center;
 	width: 24px;
 }
 
-.credits-generation:first-child.gen11{
+.credits-generation:first-child.gen6,
+.credits-generation:first-child.gen8,
+.credits-generation:first-child.gen11,
+.credits-generation:first-child.gen12,
+.credits-generation:first-child.gen14,
+.credits-generation:first-child.gen15 {
 	margin-left: 4px;
 }
 
@@ -508,6 +512,10 @@ table.e4-moves td {
 .gen9 { background-color: #025da6; }
 .gen10 { background-color: #ab2813; }
 .gen11 { background-color: #f11; box-shadow: 0 0 2px 2px #fc7676; }
+.gen12 { background-color: #26649c; box-shadow: 0 0 2px 2px #7daad1; }
+.gen13 { background-color: #525252; }
+.gen14 { background-color: #604e82; box-shadow: 0 0 2px 2px #978cae; }
+.gen15 { background-color: #4fd9ff; box-shadow: 0 0 2px 2px #4fd9ff; }
 
 .block {
 	display: block;
@@ -541,7 +549,7 @@ table.e4-moves td {
 .bg-seafloor{ background-image: url('/img/boxes/e/seafloor.png'); }
 .bg-river	{ background-image: url('/img/boxes/e/river.png'); }
 .bg-sky		{ background-image: url('/img/boxes/e/sky.png'); }
-.bg-polkadot{ background-image: url('/img/boxes/e/polkadot.png'); }
+.bg-polkadot{ background-image: url('/img/boxes/e/polka-dot.png'); }
 .bg-pokecenter	{ background-image: url('/img/boxes/e/pokecenter.png'); }
 .bg-machine	{ background-image: url('/img/boxes/e/machine.png'); }
 .bg-simple	{ background-image: url('/img/boxes/e/simple.png'); }
@@ -570,6 +578,10 @@ table.e4-moves td {
 
 .milestone-name {
 	margin-left: 15px;
+}
+
+.milestone-time {
+	width: 100px;
 }
 
 @media (max-width: 992px) {
@@ -754,4 +766,20 @@ table.e4-moves td {
 
 .tpp-app-hidden {
 	display: none;
+}
+
+
+
+.table-bordered {
+	border: none !important;
+	border-top: 1px solid #ddd !important;
+	border-bottom: 1px solid #ddd !important;
+}
+
+.table-bordered tr:not(.spacer) td:first-child {
+	border-left: 2px solid #ddd;
+}
+
+.table-bordered tr:not(.spacer) td:last-child {
+	border-right: 1px solid #ddd;
 }

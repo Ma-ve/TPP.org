@@ -11,7 +11,11 @@ foreach($chunk as $pokemon) {
 	$this->render('pokemon/_image', array('pokemon' => $pokemon, 'size' => 80));
 	$this->render('pokemon/_level', array('pokemon' => $pokemon));
 	$this->render('pokemon/_nickname', array('pokemon' => $pokemon));
-	$this->render('pokemon/_moves', array('pokemon' => $pokemon));
+	$this->render('pokemon/_moves', array('pokemon' => $pokemon)); ?>
+
+						<tr class="spacer">
+							<td colspan="6"></td>
+						</tr><?php
 } ?>
 
 					</table>

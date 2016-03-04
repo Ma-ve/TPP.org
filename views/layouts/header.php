@@ -1,7 +1,5 @@
 <!--
 
-
-
 ##############  ##############  ##############        ##############  ##############  ##############
       ##        ##          ##  ##          ##        ##          ##  ##        ####  ##
       ##        ##          ##  ##          ##        ##          ##  ##      ###     ##
@@ -10,10 +8,8 @@
       ##        ##              ##              ####  ##          ##  ##    #####     ##          ##
       ##        ##              ##              ####  ##############  ##      ######  ##############
 
-Checking out the source eh? I'll one-up you:
+Checking out the source? I'll one-up you:
 See the source at https://github.com/Ma-ve/TPP.org and help us improve :D
-
-
 
 --><!DOCTYPE html>
 <html lang="en">
@@ -97,16 +93,19 @@ See the source at https://github.com/Ma-ve/TPP.org and help us improve :D
 		<div class="container tpp-container">
 			<div class="pokemon-menu">
 				<ul>
-					<li><a href="#top">Top</a>
-					<li><a href="#pokemon">Pok&eacute;mon [Party]</a>
-					<li><a href="#badges">Badges</a>
-					<li><a href="#pokemon-box">Box</a>
-					<li><a href="#pokemon-daycare">Daycare</a>
-					<li><a href="#items">Items</a>
-					<!--<li><a href="#timeline">Timeline [NEW]</a>-->
-					<li><a href="#pokemon-history">History</a>
-					<li><a href="#milestones">Milestones</a>
-					<li><a href="#facts">Facts</a>
-					<li><a href="#credits">Credits [who to thank!]</a>
+					<li><a href="#top">Top</a></li>
+					<li><a href="#pokemon">Pok&eacute;mon [Party]</a></li>
+					<li><a href="#elitefour">Elite Four</a></li>
+					<li><a href="#badges">Badges</a></li>
+					<li><a href="#pokemon-box">Box</a></li>
+					<li><a href="#boxes">Boxes</a></li>
+					<li><a href="#pokemon-daycare">Daycare</a></li>
+					<li><a href="#items">Items</a></li>
+					<li><a href="#wild">Wild Pok&eacute;mon</a></li>
+					<li><a href="#pokemon-timeline">Timeline</a></li>
+					<li><a href="#pokemon-history">History</a></li>
+					<li><a href="#milestones">Milestones</a></li>
+					<li><a href="#facts">Facts</a></li>
+					<li><a href="#credits">Credits [who to thank!]</a></li>
 				</ul>
 			</div>
