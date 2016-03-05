@@ -1,4 +1,2 @@
-/img
-/nbproject
 /config/config.json
-/idea
+.idea/

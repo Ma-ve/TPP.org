@@ -776,10 +776,12 @@ table.e4-moves td {
 	border-bottom: 1px solid #ddd !important;
 }
 
+.table-bordered tr:not(.spacer) th:first-child,
 .table-bordered tr:not(.spacer) td:first-child {
-	border-left: 2px solid #ddd;
+	border-left: 1px solid #ddd;
 }
 
+.table-bordered tr:not(.spacer) th:last-child,
 .table-bordered tr:not(.spacer) td:last-child {
 	border-right: 1px solid #ddd;
 }
