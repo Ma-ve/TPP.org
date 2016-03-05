@@ -24,7 +24,7 @@ class Badge extends Model {
 			b.`leader`,
 			b.`attempts`,
 			GROUP_CONCAT(DISTINCT CONCAT_WS(':', bp.`pokemon`, bp.`level`) SEPARATOR ',') as `leader_pokemon`
-			FROM `badge` b JOIN `badge_pokemon` bp ON bp.`badge_id` = b.`id`" . $where . " GROUP BY b.`id` ORDER BY `order_id`, `id`" . $limit);
+			FROM `badge` b LEFT JOIN `badge_pokemon` bp ON bp.`badge_id` = b.`id`" . $where . " GROUP BY b.`id` ORDER BY `order_id`, `id`" . $limit);
 		$obtained = 0;
 		while($badg = $getBadges->fetch_assoc()) {
 			$newBadge = new self();
@@ -46,12 +46,15 @@ class Badge extends Model {
 	public static function getTrainerForBadge($leader, $pokemon_string) {
 		$trainer = new Trainer();
 		$trainer->setName($leader);
-		foreach(explode(',', $pokemon_string) as $pokemon) {
-			$ex = explode(':', $pokemon);
-			$newPokemon = new Pokemon();
-			$newPokemon->name = $ex[0];
-			$newPokemon->level = $ex[1];
-			$returnPokemon[] = $newPokemon;
+		$returnPokemon = [];
+		if($pokemon_string != '') {
+			foreach (explode(',', $pokemon_string) as $pokemon) {
+				$ex = explode(':', $pokemon);
+				$newPokemon = new Pokemon();
+				$newPokemon->name = $ex[0];
+				$newPokemon->level = $ex[1];
+				$returnPokemon[] = $newPokemon;
+			}
 		}
 		$trainer->pokemon = $returnPokemon;
 		return $trainer;

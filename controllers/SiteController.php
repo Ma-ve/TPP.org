@@ -18,7 +18,12 @@ class SiteController extends Controller {
 		), true);
 
 		$this->render('badge/index', array(
-			'badges' => Badge::getBadges(null, 'LIMIT 0, 8')
+			'badges' => [
+				'Kanto' => Badge::getBadges(null, 'LIMIT 0, 8'),
+				'Kanto (rematch)' => Badge::getBadges(null, 'LIMIT 8, 8'),
+				'Johto' => Badge::getBadges(null, 'LIMIT 16, 8'),
+				'Johto (rematch)' => Badge::getBadges(null, 'LIMIT 24, 8'),
+			],
 		), true);
 
 		$this->render('pokemon_box/index', array(
