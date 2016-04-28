@@ -246,4 +246,9 @@ class Pokemon extends Model {
 	public function getNatureDescription() {
 		return $this->nature;
 	}
+
+        public function getCharacteristicDescription() {
+                return $this->characteristic;
+        }
+
 }
