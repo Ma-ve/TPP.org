@@ -1,10 +1,7 @@
-{
-	"TWITCHVERSION"		: "red",
-	"DB_DATABASE"		: "twitchplayspokemon",
+<?php
+return [
+        'TWITCHVERSION'         => 'version',  // If empty, it looks for $_SERVER['VERSION'] or $_SERVER['REDIRECT_VERSION']. See models/Init.php::loadConfig()
+        "TPP_DEBUG"             => true,       // If debugging should be on
+        "TPP_START_TIME"        => 12345678,   // UNIX timestamp
+];
 
-	"DB_HOST"			: "localhost",
-	"DB_USER"			: "root",
-	"DB_PASS"			: "",
-
-	"IMG_PATH"			: "/img"
-}
