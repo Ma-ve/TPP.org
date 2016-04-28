@@ -101,6 +101,10 @@ class Credit extends Model {
 			case 9: return 'VI';
 			case 10: return 'VI';
 			case 11: return 'I';
+			case 12: return 'VI';
+			case 13: return 'III';
+			case 14: return 'III';
+			case 15: return 'II';
 			default: return 'I';
 		}
 }
@@ -119,6 +123,10 @@ class Credit extends Model {
 			case 9: return 'Pok&eacute;mon X';
 			case 10: return 'Pok&eacute;mon Omega Ruby';
 			case 11: return 'Pok&eacute;mon Red [Anniversary!]';
+			case 12: return 'Pok&eacute;mon Alpha Sapphire (Randomized)';
+			case 13: return 'Pok&eacute;mon Colosseum';
+			case 14: return 'Pok&eacute;mon XD: Gale of Darkness';
+			case 15: return 'Pok&eacute;mon Crystal [Anniversary!]';
 			default: return $integer;
 		}
 }

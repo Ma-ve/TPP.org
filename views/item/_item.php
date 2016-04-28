@@ -3,7 +3,7 @@ foreach($items as $type => $items) { ?>
 
 				<div class="col-md-3">
 					<ul class="items">
-						<li class="item-header"><strong><?= utf8_encode($type); ?></strong></li><?php
+						<li class="item-header"><strong><?= $type; ?></strong></li><?php
 	foreach($items as $item) { ?>
 
 						<li>
