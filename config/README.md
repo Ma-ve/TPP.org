@@ -15,9 +15,9 @@ The general `config.php` resides one level higher than this directory, outside t
     <?php
     return [
         "DB_DATABASE" => "twitchplayspokemon_", // The database prefix
-        "IMG_PATH" => "/img", // Image path relative to the domain. May be an external CDN link
-        "DB_HOST" => "localhost", // Database host
-        "DB_USER" => "tppuser", // Database username
-        "DB_PASS" => "tpppass", // Database password
-        "TPP_CACHE_KEY" => "cachekey", // Cache key which can be used to refresh the contents, if caching is enabled
+        "IMG_PATH" => "/img",                   // Image path relative to the domain. May be an external CDN link
+        "DB_HOST" => "localhost",               // Database host
+        "DB_USER" => "tppuser",                 // Database username
+        "DB_PASS" => "tpppass",                 // Database password
+        "TPP_CACHE_KEY" => "cachekey",          // Cache key which can be used to refresh the contents, if caching is enabled
     ];
