@@ -20,13 +20,13 @@
 				<p>Current Pok&eacute;center: <strong><?= utf8_decode($general->current_pokecenter); ?></strong></p>
 				<p>Money in hand: <strong><?= Image::toImage('/items', 'pokedollar', array('title' => 'Pok&eacute;dollar', 'title' => 'Pok&eacute;dollar')); ?><?= $general->money; ?></strong></p>
 			</div>
-			<div class="current-info pull-right text-right">
-				<p>Before this, we played Pok&eacute;mon:</p>
-				<p><a href="/red">Red</a> | <a href="/crystal">Crystal</a> | <a href="/emerald">Emerald</a> | <a href="/firered">FireRed</a> | <a href="/platinum">Platinum</a> | <a href="/heartgold">HeartGold</a> | <a href="/black">Black</a> | <a href="/black2">Black 2</a> | <a href="/x">X</a> | <a href="/omegaruby">Omega Ruby</a></p>
-				<p>We're playing <a href="http://www.reddit.com/r/twitchplayspokemon/" target="_blank">Pok&eacute;mon Red for our Anniversary</a> right now!</p>
-				<p><span class="more-info"><a href="" class="show-about"><i class="fa fa-caret-right"></i>What is this all about?</a></span></p>
-				<p><span class="more-info"><a href="" class="show-feedback"><i class="fa fa-caret-right"></i>Feedback/suggestions?</a></span></p>
-			</div>
+					<div class="current-info pull-right text-right">
+						<p>Before this, we played Pok&eacute;mon:</p>
+						<p><a href="/red">Red</a> | <a href="/crystal">Crystal</a> | <a href="/emerald">Emerald</a> | <a href="/firered">FireRed</a> | <a href="/platinum">Platinum</a> | <a href="/heartgold">HeartGold</a> | <a href="/black">Black</a> | <a href="/black2">Black 2</a></p>
+						<p><a href="/x">X</a> | <a href="/omegaruby">Omega Ruby</a> | <a href="/ar">Anniversary Red</a> | <a href="/alphasapphire">Alpha Sapphire</a> | <a href="/colosseum">Colosseum</a> | <a href="/xd">XD</a></p>
+						<p>We're playing <a href="http://www.reddit.com/r/twitchplayspokemon/" target="_blank">Pok&eacute;mon Anniversary Crystal</a> right now!</p>
+						<p><span class="more-info"><a href="" class="show-about"><i class="fa fa-caret-right"></i>What is this all about?</a></span>&nbsp;&nbsp;&nbsp;<span class="more-info"><a href="" class="show-feedback"><i class="fa fa-caret-right"></i>Feedback/suggestions?</a></span></p>
+					</div>
 			<div class="clearfix"></div>
 		</div>
 		<div id="about" class="about">
