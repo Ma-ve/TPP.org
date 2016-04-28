@@ -15,6 +15,9 @@ class Model {
 		if(is_null($name)) {
 			$name = $this->name;
 		}
+		if(strpos($path, '/') !== 0) {
+			$path = '/' . $path;
+		}
 		return Image::toImage($path, $name, $htmlOptions);
 	}
 }

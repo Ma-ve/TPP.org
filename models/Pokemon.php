@@ -187,9 +187,9 @@ class Pokemon extends Model {
 
 	public function showMenuImage($htmlOptions = array()) {
 		$addToImage = '';
-		$addToImage .= isset($p->season) ? '_' . $p->season : '';
-		$addToImage .= isset($p->gender) ? '_' . $p->gender : '';
-		$addToImage .= isset($p->is_shiny) ? '_s' : '';
+		$addToImage .= isset($this->season) ? '_' . $this->season : '';
+		$addToImage .= isset($this->gender) ? '_' . $this->gender : '';
+		$addToImage .= isset($this->is_shiny) ? '_s' : '';
 		return parent::image('/pokemon/sprites/red', $this->pokemon . $addToImage, $htmlOptions);
 	}
 

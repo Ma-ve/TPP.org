@@ -13,6 +13,7 @@ class Trainer extends Model {
 	}
 
 	public function showImage() {
-		return '<i class="sprite-trainer sprite-trainer-' . FuncHelp::safeName($this->name) . '" title="' . $this->name . '" alt="' . $this->name . '"></i>';
+//		return '<i class="sprite-trainer sprite-trainer-' . FuncHelp::safeName($this->name) . '" title="' . $this->name . '" alt="' . $this->name . '"></i>';
+		return parent::image('trainers/' . TWITCHVERSION, $this->name);
 	}
 }
