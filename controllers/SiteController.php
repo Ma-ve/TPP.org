@@ -6,48 +6,55 @@ class SiteController extends Controller {
 	public function actionIndex() {
 		$this->render('layouts/header');
 
-		$this->render('general/index', array(
+		$this->render('general/index', [
 			'general' => $this->getGeneral(),
 			'messages' => $this->getMessages(),
-		), true);
+		], true);
 
-		$this->render('pokemon/index', array(
+		$this->render('pokemon/index', [
 			'pokemon' => Pokemon::getPartyPokemon(),
 			'owned' => $this->getGeneral()->pokedex_owned,
 			'seen' => $this->getGeneral()->pokedex_seen
-		), true);
+		], true);
 
-		$this->render('badge/index', array(
-			'badges' => Badge::getBadges(null, 'LIMIT 0, 8')
-		), true);
+		$badges = Badge::getBadges(null, 'LIMIT 0, 8');
 
-		$this->render('pokemon_box/index', array(
+		if($badges['obtained'] == 8) {
+//			$this->render('elitefour/index', [
+//				EliteFour::getEliteFour(),
+//			]);
+		}
+		$this->render('badge/index', [
+			'badges' => $badges,
+		], true);
+
+		$this->render('pokemon_box/index', [
 			'pokemon' => Pokemon::getBoxPokemon()
-		), true);
+		], true);
 
-		$this->render('pokemon_daycare/index', array(
+		$this->render('pokemon_daycare/index', [
 			'pokemon' => Pokemon::getDaycarePokemon()
-		), true);
+		], true);
 
-		$this->render('item/index', array(
+		$this->render('item/index', [
 			'items' => Item::getAllItems()
-		), true);
+		], true);
 
-		$this->render('pokemon_history/index', array(
+		$this->render('pokemon_history/index', [
 			'pokemon' => Pokemon::getHistoryPokemon()
-		), true);
+		], true);
 
-		$this->render('milestone/index', array(
+		$this->render('milestone/index', [
 			'milestones' => Milestone::getMilestones()
-		), true);
+		], true);
 
-		$this->render('fact/index', array(
+		$this->render('fact/index', [
 			'facts' => Fact::getFacts()
-		), true);
+		], true);
 
-		$this->render('credit/index', array(
+		$this->render('credit/index', [
 			'credits' => Credit::getCredits()
-		), true);
+		], true);
 
 		$this->render('layouts/footer');
 	}
@@ -62,7 +69,7 @@ class SiteController extends Controller {
 
 		if($getMessages->num_rows > 0) {
 			while($getMessages->fetch()) {
-				$return = array('message' => $message, 'id' => $messageId, 'sentUser' => $sentUser, 'suggestion' => $suggestion);
+				$return = ['message' => $message, 'id' => $messageId, 'sentUser' => $sentUser, 'suggestion' => $suggestion];
 			}
 			$getMessages->free_result();
 			return $return;

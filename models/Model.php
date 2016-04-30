@@ -11,7 +11,7 @@ class Model {
 		}
 	}
 
-	public function image($path = '', $name = null, $htmlOptions = array()) {
+	public function image($path = '', $name = null, $htmlOptions = []) {
 		if(is_null($name)) {
 			$name = $this->name;
 		}

@@ -30,20 +30,20 @@ class Badge extends Model {
 		$obtained = 0;
 		while($badg = $getBadges->fetch_assoc()) {
 			$newBadge = new self();
-			$newBadge->setAttributes(array(
+			$newBadge->setAttributes([
 				'id' => $badg['id'],
 				'name' => $badg['name'],
 				'time' => $badg['time'],
 				'type' => $badg['type'],
 				'leader' => self::getTrainerForBadge($badg['leader'], $badg['leader_pokemon']),
 				'attempts' => $badg['attempts']
-			));
-			if($badg['attempts'] > 0) {
+			]);
+			if(isset($badg['time']) && $badg['time'] != '') {
 				$obtained++;
 			}
 			$return[] = $newBadge;
 		}
-		return array('obtained' => $obtained, 'badges' => $return);
+		return ['obtained' => $obtained, 'badges' => $return];
 	}
 
 	public static function getTrainerForBadge($leader, $pokemon_string) {
@@ -61,6 +61,6 @@ class Badge extends Model {
 	}
 
 	public function showImage() {
-		return Image::toImage('/badges', $this->name, array('title' => $this->name . ' Badge', 'alt' => $this->name . ' Badge'));
+		return Image::toImage('/badges', $this->name, ['title' => $this->name . ' Badge', 'alt' => $this->name . ' Badge']);
 	}
 }

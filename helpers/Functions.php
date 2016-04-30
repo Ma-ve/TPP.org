@@ -52,26 +52,26 @@ class FuncHelp
 
     public static function safeName($name) {
         return strtolower(str_replace(
-                array(
+                [
                     ' ',
                     '.',
                     'é',
                     '-',
                     '\'',
                     '&eacute;',
-                ), array(
+                ], [
                 '_',
                 '',
                 'e',
                 '_',
                 '',
                 'e',
-            ), $name)
+            ], $name)
         );
     }
 
     public static function getHmMoves() {
-        return array(
+        return [
             'Cut',
             'Fly',
             'Surf',
@@ -79,7 +79,7 @@ class FuncHelp
             'Flash',
             'Whirlpool',
             'Waterfall'
-        );
+        ];
     }
 
     public static function utf8ify($s) {
@@ -91,11 +91,11 @@ class FuncHelp
 if(!function_exists('array_split')) {
     function array_split($array, $pieces = 2) {
         if ($pieces < 2) {
-            return array($array);
+            return [$array];
         }
         $newCount = ceil(count($array) / $pieces);
         $a = array_slice($array, 0, $newCount);
         $b = array_split(array_slice($array, $newCount), $pieces - 1);
-        return array_merge(array($a), $b);
+        return array_merge([$a], $b);
     }
 }

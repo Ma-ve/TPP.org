@@ -10,7 +10,7 @@
 						<span class="pull-right last-update">Last update: <?= FuncHelp::getDateTime($general->last_update); ?></span>
 					</h1><?php
 	if(!empty($messages)) {
-		$this->render('general/_messages', array('messages' => $messages));
+		$this->render('general/_messages', ['messages' => $messages]);
 	} ?>
 
 			<div class="pull-left current-status">
@@ -18,7 +18,7 @@
 				<p>Optional Goal: <strong><?= !empty($general->optional_goal) ? utf8_decode($general->optional_goal) : '-'; ?></strong></p>
 				<p>Current Location: <strong><?= utf8_decode($general->current_location); ?></strong></p>
 				<p>Current Pok&eacute;center: <strong><?= utf8_decode($general->current_pokecenter); ?></strong></p>
-				<p>Money in hand: <strong><?= Image::toImage('/items', 'pokedollar', array('title' => 'Pok&eacute;dollar', 'title' => 'Pok&eacute;dollar')); ?><?= $general->money; ?></strong></p>
+				<p>Money in hand: <strong><?= Image::toImage('/items', 'pokedollar', ['title' => 'Pok&eacute;dollar', 'title' => 'Pok&eacute;dollar']); ?><?= $general->money; ?></strong></p>
 			</div>
 					<div class="current-info pull-right text-right">
 						<p>Before this, we played Pok&eacute;mon:</p>

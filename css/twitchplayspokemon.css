@@ -767,7 +767,8 @@ table.e4-moves td {
 
 
 .table-bordered {
-	border: none !important;
+	border-left: 0;
+	border-right: 0;
 	border-top: 1px solid #ddd !important;
 	border-bottom: 1px solid #ddd !important;
 }

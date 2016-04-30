@@ -5,7 +5,7 @@ class Image extends Model {
 	public function __construct() {
 	}
 
-	public static function toImage($path, $name, $htmlOptions = array()) {
+	public static function toImage($path, $name, $htmlOptions = []) {
 		$image = IMG_PATH . $path . '/' . FuncHelp::safeName($name) . '.png';
 		if(TPP_DEBUG) {
 			if(!file_exists($_SERVER['DOCUMENT_ROOT'] . $image)) {

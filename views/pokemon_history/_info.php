@@ -11,7 +11,7 @@ foreach($pokemon as $p) { ?>
 	} ?>
 
 								</td>
-								<td style="height: 100px; line-height: 14px;"><?= $p->showImage(array(), 80); ?></td>
+								<td style="height: 100px; line-height: 14px;"><?= $p->showImage([], 80); ?></td>
 								<td style="height: 100px; line-height: 14px;">
 									<ul class="pokemon-moves text-left">
 										<li><strong>Level <?= $p->level; ?></strong></li><?php

@@ -21,7 +21,7 @@ foreach($pokemon as $p) { ?>
 			echo ' ';
 		}
 	
-		echo Image::toImage('/misc', 'pokerus' . $pokerusImg, array('data-content' => $pokerusTitle, 'class' => 'tpp-tooltip')); ?></td><?php
+		echo Image::toImage('/misc', 'pokerus' . $pokerusImg, ['data-content' => $pokerusTitle, 'class' => 'tpp-tooltip']); ?></td><?php
 	}
 } ?>
 

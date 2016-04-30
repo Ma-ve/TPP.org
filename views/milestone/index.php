@@ -13,7 +13,7 @@ foreach(array_split($milestones, 3) as $milestones) { ?>
 					<div class="col-md-4 col-pokemon-milestones">
 						<div class="table-responsive table-bordered table-striped table-pokemon table-milestones">
 							<table class="table"><?php
-	$this->render('milestone/_info', array('milestones' => $milestones)); ?>
+	$this->render('milestone/_info', ['milestones' => $milestones]); ?>
 
 							</table>
 						</div>
