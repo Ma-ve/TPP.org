@@ -61,17 +61,15 @@ class SiteController extends Controller {
 
 	public function getMessages() {
 //		$getMessages = TPP::db()->prepare("SELECT m.`id`, m.`message`, m.`sent_user`, s.`suggestion` FROM `message` m LEFT JOIN `suggestion` s ON m.`suggestion_id` = s.`id` ORDER BY `date_created` ASC LIMIT 1") or die(TPP::db()->error);
-		$getMessages = TPP::db()->prepare("SELECT m.`id`, m.`message`, m.`sent_user`, s.`suggestion` FROM `message` m LEFT JOIN `suggestion` s ON m.`suggestion_id` = s.`id` WHERE m.`read` = 0 AND m.`ip` = ? ORDER BY `date_created` ASC LIMIT 1") or die(TPP::db()->error);
-		$getMessages->bind_param('s', $_SERVER["REMOTE_ADDR"]);
-		$getMessages->execute();
-		$getMessages->bind_result($messageId, $message, $sentUser, $suggestion);
-		$getMessages->store_result();
+		$getMessages = TPP::db()->prepare("SELECT m.`id`, m.`message`, m.`sent_user`, s.`suggestion` FROM `message` m LEFT JOIN `suggestion` s ON m.`suggestion_id` = s.`id` WHERE m.`read` = 0 AND m.`ip` = :ip ORDER BY `date_created` ASC LIMIT 1") or die(TPP::db()->error);
+		$getMessages->execute([
+			':ip' => $_SERVER['REMOTE_ADDR'],
+		]);
 
-		if($getMessages->num_rows > 0) {
-			while($getMessages->fetch()) {
-				$return = ['message' => $message, 'id' => $messageId, 'sentUser' => $sentUser, 'suggestion' => $suggestion];
+		if($getMessages->rowCount() > 0) {
+			while($m = $getMessages->fetch()) {
+				$return = ['message' => $m['message'], 'id' => $m['id'], 'sentUser' => $m['sent_user'], 'suggestion' => $m['suggestion']];
 			}
-			$getMessages->free_result();
 			return $return;
 		}
 	}
@@ -79,7 +77,7 @@ class SiteController extends Controller {
 	public function getGeneral() {
 		$getGeneral = TPP::db()->query("SELECT `name`, `value` FROM `general` WHERE `value` != ''")or die(TPP::db()->error);
 		$model = new stdClass();
-		while($general = $getGeneral->fetch_assoc()) {
+		while($general = $getGeneral->fetch()) {
 			$model->$general['name'] = utf8_encode(stripslashes($general['value']));
 		}
 		if(isset($model->notice)) {

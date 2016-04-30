@@ -30,7 +30,7 @@ class Pokemon extends Model {
 			JOIN `status` s
 			ON s.`id` = p.`status`
 			" . $where . " GROUP BY p.`id`" . $order . $limit) or die(TPP::db()->error);
-		while($pok = $getPokemon->fetch_assoc()) {
+		while($pok = $getPokemon->fetch()) {
 			$newPokemon = new self();
 			$newPokemon->setAttributes([
 				'id' => $pok['id'],
@@ -67,7 +67,7 @@ class Pokemon extends Model {
 		AND
 			pfe.`field_id` = f.`id`");
 		$i = 0;
-		while($fi = $getFields->fetch_assoc()) {
+		while($fi = $getFields->fetch()) {
 			$fields[$fi['name']] = $fi['value'];
 		}
 		if(isset($fields['next_move'])) {
