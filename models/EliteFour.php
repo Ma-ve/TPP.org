@@ -16,20 +16,23 @@ class EliteFour extends Model {
 		
 	}
 
-	public static function getEliteFour($where = null, $limit = null, $order = ' `order_id`, `id` ') {
+	public static function getEliteFour($where = null, $limit = null, $order = ' `order`, `id` ') {
 		if(!is_null($where)) {
 			$where = 'WHERE ' . $where;
 		}
 
 		$getEliteFour = TPP::db()->query("SELECT
-			b.`id`,
-			b.`name`,
-			b.`time`,
-			b.`leader`,
-			b.`type`,
-			b.`attempts`,
+			e.`id`,
+			e.`name`,
+			e.`type`,
+			e.`attempts`,
+			e.`wins`,
+			e.`losses`,
+			e.`time`,
+			e.`is_rematch`,
+			e.`order`,
 			GROUP_CONCAT(DISTINCT CONCAT_WS(':', bp.`pokemon`, bp.`level`) SEPARATOR ',') as `leader_pokemon`
-			FROM `badge` b JOIN `badge_pokemon` bp ON bp.`badge_id` = b.`id`" . $where . " GROUP BY b.`id` ORDER BY " . $order . $limit);
+			FROM `badge` e JOIN `badge_pokemon` bp ON bp.`badge_id` = b.`id`" . $where . " GROUP BY b.`id` ORDER BY " . $order . $limit);
 		$obtained = 0;
 		while($badg = $getEliteFour->fetch()) {
 			$newBadge = new self();
