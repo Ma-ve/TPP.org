@@ -21,17 +21,17 @@ exit();
 
 function prioIncludes() {
 
-	$priorityIncludes = array(
-		'helpers' => array(
+	$priorityIncludes = [
+		'helpers' => [
 			'ErrorHandler',
-		),
-		'controllers' => array(
+		],
+		'controllers' => [
 			'Controller',
-		),
-		'models' => array(
+		],
+		'models' => [
 			'TPP',
 			'Model',
-	));
+		]];
 
 	foreach($priorityIncludes as $key => $prio) {
 		foreach($prio as $pr) {
@@ -41,7 +41,7 @@ function prioIncludes() {
 }
 
 function includes() {
-	$includes = array('controllers', 'models', 'helpers');
+	$includes = ['controllers', 'models', 'helpers'];
 
 	foreach($includes as $inc) {
 		foreach(glob($inc . "/*.php") as $filename) {

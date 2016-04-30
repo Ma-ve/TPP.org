@@ -4,7 +4,7 @@ $this->render('credit/_general');
 foreach(array_chunk($credits, 2) as $credits) { ?>
 
 							<div class="row credits"><?php
-	$this->render('credit/_info', array('credits' => $credits)); ?>
+	$this->render('credit/_info', ['credits' => $credits]); ?>
 
 							</div><?php
 }

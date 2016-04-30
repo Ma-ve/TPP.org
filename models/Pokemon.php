@@ -32,7 +32,7 @@ class Pokemon extends Model {
 			" . $where . " GROUP BY p.`id`" . $order . $limit) or die(TPP::db()->error);
 		while($pok = $getPokemon->fetch_assoc()) {
 			$newPokemon = new self();
-			$newPokemon->setAttributes(array(
+			$newPokemon->setAttributes([
 				'id' => $pok['id'],
 				'name' => $newPokemon->setName($pok['name'], $pok['pokemon']),
 				'pokemon' => $newPokemon->setPokemon($pok['pokemon']),
@@ -44,7 +44,7 @@ class Pokemon extends Model {
 				'status' => $pok['status_name'],
 				'comment' => FuncHelp::getDateTime($pok['comment']),
 				'moves' => $newPokemon->setMoves($pok['moves']),
-			));
+			]);
 			$newPokemon->setAttributes($newPokemon->getFields());
 
 			$return[] = $newPokemon;
@@ -53,7 +53,7 @@ class Pokemon extends Model {
 	}
 
 	public function getFields() {
-		$fields = array();
+		$fields = [];
 		$getFields = TPP::db()->query("
 		SELECT
 			f.`name`,
@@ -85,7 +85,7 @@ class Pokemon extends Model {
 
 	public function setName($name, $pokemon) {
 		return !empty($name)
-		? str_replace(array(' ', '\Pk'), array('&nbsp;', '<img src="/img/pk.png" title="" alt="">'), stripslashes(FuncHelp::utf8ify($name)))
+		? str_replace([' ', '\Pk'], ['&nbsp;', '<img src="/img/pk.png" title="" alt="">'], stripslashes(FuncHelp::utf8ify($name)))
 		: FuncHelp::utf8ify($pokemon);
 	}
 
@@ -174,7 +174,7 @@ class Pokemon extends Model {
 		return null;
 	}
 
-	public function showImage($htmlOptions = array(), $size = null) {
+	public function showImage($htmlOptions = [], $size = null) {
 		$path = '/pokemon';
 		$path .= !is_null($size) ? '/80' : '';
 		$pokemon = $this->pokemon;
@@ -185,7 +185,7 @@ class Pokemon extends Model {
 		return parent::image($path, $pokemon, $htmlOptions);
 	}
 
-	public function showMenuImage($htmlOptions = array()) {
+	public function showMenuImage($htmlOptions = []) {
 		$addToImage = '';
 		$addToImage .= isset($this->season) ? '_' . $this->season : '';
 		$addToImage .= isset($this->gender) ? '_' . $this->gender : '';
@@ -216,7 +216,7 @@ class Pokemon extends Model {
 	}
 
 	public function getMoves() {
-		$return = array();
+		$return = [];
 		if(isset($this->moves)) {
 			$hms = FuncHelp::getHmMoves();
 			foreach($this->moves as $move) {

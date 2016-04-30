@@ -8,7 +8,7 @@ foreach(array_split($facts, 3) as $facts) { ?>
 					<div class="col-md-4 col-pokemon-milestones">
 						<div class="table-responsive table-bordered table-striped table-pokemon table-milestones">
 							<table class="table"><?php
-	$this->render('fact/_info', array('facts' => $facts)); ?>
+	$this->render('fact/_info', ['facts' => $facts]); ?>
 
 							</table>
 						</div>

@@ -2,7 +2,7 @@
 
 class Controller {
 
-	public function render($view, $params = array(), $cache = false) {
+	public function render($view, $params = [], $cache = false) {
 		if(!empty($params)) {
 			foreach($params as $key => $p) {
 				$$key = $p;
