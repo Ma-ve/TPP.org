@@ -54,7 +54,7 @@ class Credit extends Model {
 			FROM `credits`
 			WHERE `order_id` > 0
 			ORDER BY `order_id`, `id`")or die(TPP::db()->error);
-		while($credit = $getCredits->fetch_assoc()) {
+		while($credit = $getCredits->fetch()) {
 			$newCredit = new self();
 			$newCredit->setAttributes($credit);
 			$newCredit->quote = Credit::getQuote($newCredit->quote);

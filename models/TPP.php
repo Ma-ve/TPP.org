@@ -13,15 +13,20 @@ class TPP {
 		return self::$instance;
 	}
 
-	public static function initializeConnection($connectionInfo) {
+	public static function initializeConnection() {
 		$db = self::getInstance();
-		$mysqli = new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE . TWITCHVERSION);
-		if(!$mysqli->set_charset('utf8')) {
-			die('Could not set database charset to utf8');
-		}
-		$db->db_connection = $mysqli;
+		$pdo = new pdo('mysql:host=' . DB_HOST . ';dbname=' . DB_DATABASE . TWITCHVERSION, DB_USER, DB_PASS, [
+			PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
+			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+			PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+		]);
+
+		$db->db_connection = $pdo;
 	}
 
+	/**
+	 * @return PDO
+	 */
 	public static function db() {
 		$db = self::getInstance();
 		return $db->db_connection;

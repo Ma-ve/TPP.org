@@ -36,7 +36,7 @@ class Fact extends Model {
 			FROM `fact`
 			WHERE `order_id` > 0
 			ORDER BY `order_id`, `id`")or die(TPP::db()->error);
-		while($fact = $getFacts->fetch_assoc()) {
+		while($fact = $getFacts->fetch()) {
 			$newFact = new self();
 			$newFact->setAttributes($fact);
 			$return[] = $newFact;

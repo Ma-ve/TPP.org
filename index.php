@@ -5,13 +5,12 @@ includes();
 
 new Init();
 
-if(TPP_DEBUG) {
+//if(TPP_DEBUG) {
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
-	set_error_handler("exception_error_handler", E_ALL);
-}
+//}
 
-TPP::initializeConnection(new mysqli(DB_HOST, DB_USER, DB_PASS, DB_DATABASE . TWITCHVERSION));
+TPP::initializeConnection();
 
 $site = new SiteController();
 $site->actionIndex();

@@ -24,7 +24,7 @@ class Item extends Model {
 			ON i.`item_type_id` = it.`id`
 			WHERE `amount` != 0 OR `amount` IS NULL
 			ORDER BY `item_type_id`, `pc`, IFNULL(`amount`, 99) DESC, `name`")or die(TPP::db()->error);
-		while($item = $getItems->fetch_assoc()) {
+		while($item = $getItems->fetch()) {
 			$newItem = new self();
 			$newItem->setAttributes($item);
 			$return[$item['item_type']][] = $newItem;
