@@ -1,0 +1,13 @@
+{
+    "name": "ma-ve/twitchplayspokemon",
+    "require-dev": {
+        "jdorn/sql-formatter": "^1.2"
+    },
+    "authors": [
+        {
+            "name": "Mave",
+            "email": "info@mave.me"
+        }
+    ],
+    "require": {}
+}

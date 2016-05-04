@@ -45,12 +45,66 @@ class Pokemon extends Model {
 				'comment' => FuncHelp::getDateTime($pok['comment']),
 				'moves' => $newPokemon->setMoves($pok['moves']),
 			]);
-			$newPokemon->setAttributes($newPokemon->getFields());
 
-			$return[] = $newPokemon;
+			$return[$newPokemon->id] = $newPokemon;
 		}
+		$return = self::getFieldsAll($return);
+
 		return $return;
 	}
+
+	public static function getFieldsAll(array &$pokemon) {
+		$ids = [];
+		foreach($pokemon as $k => $p) {
+			$ids[] = $p->id;
+		}
+
+		$in_query = TPP::prepareParams($ids);
+
+		$getFields = TPP::db()->prepare("
+		SELECT
+			f.`name`,
+			pfe.`pokemon_id`,
+			pfe.`value`
+		FROM
+			`pokemon_field_eav` pfe,
+			`field` f
+		WHERE
+			pfe.`pokemon_id` IN(" . implode(',', array_keys($in_query)) . ")
+		AND
+			pfe.`field_id` = f.`id`
+		ORDER BY
+			pfe.`pokemon_id` DESC");
+
+		$getFields->execute($in_query);
+
+		$i = 0;
+		$pokemon_fields = [];
+		while($fi = $getFields->fetch()) {
+			$pokemon_fields[$fi['pokemon_id']][$fi['name']] = $fi['value'];
+		}
+
+		foreach($pokemon_fields as $pokemon_id => $fields) {
+			$pok = $pokemon[$pokemon_id];
+			/**
+			 * @var $pok Pokemon
+			 */
+			if(isset($fields['next_move'])) {
+				$move = new Move();
+				$move->name = $fields['next_move'];
+				unset($fields['next_move']);
+				if(isset($fields['next_move_level'])) {
+					$move->level = $fields['next_move_level'];
+					unset($fields['next_move_level']);
+				}
+				$fields['next_move'] = $move;
+			}
+			$pok->setAttributes($fields);
+		}
+
+		return $pokemon;
+	}
+
 
 	public function getFields() {
 		$fields = [];

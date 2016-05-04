@@ -19,6 +19,7 @@ echo '<h1>loaded in ' . round(microtime(true) - $time, 7) . ' secs</h1>';
 exit();
 
 function prioIncludes() {
+	require("vendor/autoload.php");
 
 	$priorityIncludes = [
 		'helpers' => [
