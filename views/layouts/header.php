@@ -28,7 +28,8 @@ See the source at https://github.com/Ma-ve/TPP.org and help us improve :D
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 		<link href="css/font-awesome.min.css" rel="stylesheet">
 		<link href="css/grayscale.css" rel="stylesheet">
-		<link href="css/jquery-ui.min.css" rel="stylesheet"><?php
+		<link href="css/jquery-ui.min.css" rel="stylesheet">
+		<link href="css/tppdebug.css" rel="stylesheet"><?php
 		} else { ?>
 
 		<link href="css/minified.css" rel="stylesheet"><?php
