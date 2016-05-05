@@ -1,9 +1,12 @@
 
 					<tr class="tr-spacer"></tr>
 					<tr><?php
-foreach($pokemon as $p) { ?>
+foreach($pokemon as $p) {
+	/**
+	 * @var $p Pokemon
+	**/  ?>
 
-						<td>
+						<td id="pokemon-<?= $p->id; ?>">
 							<strong><?= $p->name; ?><?= isset($p->gender) ? ' ' . $p->BeautifyGender($p->gender) : ''; ?><?= isset($p->poke_ball) ? ' ' . $p->poke_ball->showImage() : ''; ?></strong>
 
 							<br>
