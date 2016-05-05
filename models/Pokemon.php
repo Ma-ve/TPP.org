@@ -2,6 +2,9 @@
 
 class Pokemon extends Model {
 
+	const BOXES_ROWS = 4;
+	const BOXES_COLS = 5;
+
 	public $id;
 	public $name;
 	public $pokemon;
@@ -11,6 +14,7 @@ class Pokemon extends Model {
 	public $gender;
 	public $hold_item;
 	public $status;
+	public $box;
 
 	public static function getPokemon($where = null, $order = null, $limit = null) {
 		if(!is_null($where)) {
@@ -41,6 +45,7 @@ class Pokemon extends Model {
 				'poke_ball' => $newPokemon->setPokeBall($pok['poke_ball']),
 				'gender' => $newPokemon->setGender($pok['gender']),
 				'hold_item' => $newPokemon->setHoldItem($pok['hold_item']),
+				'box' => (int) $pok['box_id'],
 				'status' => $pok['status_name'],
 				'comment' => FuncHelp::getDateTime($pok['comment']),
 				'moves' => $newPokemon->setMoves($pok['moves']),
@@ -51,6 +56,16 @@ class Pokemon extends Model {
 		$return = self::getFieldsAll($return);
 
 		return $return;
+	}
+
+	public function __get($name) {
+		return isset($this->$name) ? $this->$name : null;
+	}
+
+	public function __set($name, $value) {
+		if(isset($this->$name)) {
+			$this->$name = $value;
+		}
 	}
 
 	public static function getFieldsAll(array &$pokemon) {
@@ -215,14 +230,7 @@ class Pokemon extends Model {
 
 	public function beautifyGender() {
 		if(isset($this->gender)) {
-			switch($this->gender) {
-				case 'm': $return = '4';
-					break;
-				case 'f': $return = '2';
-					break;
-				default: 
-					return '';
-			}
+			$return = $this->gender == 'm' ? '4' : '2';
 			return ' <span class="gender">(&#979' . $return . ';)</span>';
 		}
 		return null;
@@ -239,12 +247,22 @@ class Pokemon extends Model {
 		return parent::image($path, $pokemon, $htmlOptions);
 	}
 
-	public function showMenuImage($htmlOptions = []) {
+	public function showImageMenu($htmlOptions = []) {
+		$path = '/pokemon/sprites/menu-static';
+		$pokemon = $this->pokemon;
+
+		if($pokemon == 'Jellicent' && $this->gender == 'f') {
+			$pokemon = 'Jellicent-Female';
+		}
+		return parent::image($path, $pokemon, $htmlOptions);
+	}
+
+	public function showImageSprite($htmlOptions = []) {
 		$addToImage = '';
 		$addToImage .= isset($this->season) ? '_' . $this->season : '';
 		$addToImage .= isset($this->gender) ? '_' . $this->gender : '';
 		$addToImage .= isset($this->is_shiny) ? '_s' : '';
-		return parent::image('/pokemon/sprites/red', $this->pokemon . $addToImage, $htmlOptions);
+		return parent::image('/pokemon/sprites/' . TWITCHVERSION, $this->pokemon . $addToImage, $htmlOptions);
 	}
 
 	public function getNicknames() {

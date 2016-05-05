@@ -99,7 +99,7 @@ See the source at https://github.com/Ma-ve/TPP.org and help us improve :D
 					<li><a href="#elitefour">Elite Four</a></li>
 					<li><a href="#badges">Badges</a></li>
 					<li><a href="#pokemon-box">Box</a></li>
-					<li><a href="#boxes">Boxes</a></li>
+					<li><a href="#pokemon-boxes">Boxes</a></li>
 					<li><a href="#pokemon-daycare">Daycare</a></li>
 					<li><a href="#items">Items</a></li>
 					<li><a href="#wild">Wild Pok&eacute;mon</a></li>

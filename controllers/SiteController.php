@@ -28,8 +28,13 @@ class SiteController extends Controller
 			'badges' => $badges,
 		], true);
 
+		$boxPokemon = Pokemon::getBoxPokemon();
 		$this->render('pokemon_box/index', [
-			'pokemon' => Pokemon::getBoxPokemon(),
+			'pokemon' => $boxPokemon,
+		], true);
+
+		$this->render('pokemon_boxes/index', [
+			'boxes' => $this->orderBoxPokemon($boxPokemon),
 		], true);
 
 		$this->render('pokemon_daycare/index', [
@@ -59,6 +64,49 @@ class SiteController extends Controller
 		$this->render('layouts/footer');
 	}
 
+	/**
+	 * @param $box_pokemon Pokemon[]
+	 *
+	 * @return array
+	 */
+	private function initOrderBoxPokemon($box_pokemon) {
+		$boxes = [];
+		foreach(Box::getBoxes() as $box) {
+			$boxes[$box->id] = $box;
+		}
+
+		foreach($box_pokemon as $pokemon) {
+			$boxes[$pokemon->box]->pokemon[] = $pokemon;
+		}
+		ksort($boxes);
+
+		return $boxes;
+}
+
+	/**
+	 * @param $boxPokemon Pokemon[]
+	 *
+	 * @return array
+	 */
+	private function orderBoxPokemon($boxPokemon) {
+		$boxes = $this->initOrderBoxPokemon($boxPokemon);
+		/**
+		 * @var $box Box
+		 */
+		foreach($boxes as &$box) {
+			$chunks = array_chunk($box->pokemon, Pokemon::BOXES_ROWS);
+			if(empty($chunks)) {
+				continue;
+			}
+			foreach($chunks as $row => $chunk) {
+				foreach($chunk as $pokemon) {
+					$box->content[$row][] = $pokemon;
+				}
+			}
+		}
+
+		return $boxes;
+	}
 	/**
 	 * @return stdClass
 	 */

@@ -2,11 +2,26 @@
 
 class TPP {
 
+	/**
+	 * TPP instance
+	 * @var TPP
+	 */
 	private static $instance;
+	/**
+	 * PDO instance
+	 * @var PDO|TPPPDO
+	 */
 	private $db_connection;
 
+	/**
+	 * Main path of current file, for debugging
+	 * @var string
+	 */
 	public static $main_path;
 
+	/**
+	 * @return TPP
+	 */
 	public static function getInstance() {
 		if(self::$instance == null) {
 			$className = __CLASS__;
@@ -15,6 +30,9 @@ class TPP {
 		return self::$instance;
 	}
 
+	/**
+	 *
+	 */
 	public static function initializeConnection() {
 		$db = self::getInstance();
 		$db_opts = [
@@ -42,6 +60,9 @@ class TPP {
 		return $db->db_connection;
 	}
 
+	/**
+	 *
+	 */
 	public static function end() {
 		if(self::is_debug()) {
 
@@ -107,10 +128,18 @@ class TPP {
 		}
 	}
 
+	/**
+	 * @return bool
+	 */
 	public static function is_debug() {
 		return TPP_DEBUG && isset($_GET['debug']);
 	}
 
+	/**
+	 * @param $params
+	 *
+	 * @return array
+	 */
 	public static function prepareParams($params) {
 		$return = [];
 		foreach($params as $p) {
@@ -123,16 +152,34 @@ class TPP {
 
 class TPPPDO extends PDO {
 
+	/**
+	 * TPPPDO constructor.
+	 *
+	 * @param       $dsn
+	 * @param       $user
+	 * @param       $pass
+	 * @param array $options
+	 */
 	public function __construct($dsn, $user, $pass, $options = []) {
 		parent::__construct($dsn, $user, $pass, $options);
 	}
 
+	/**
+	 * @param string $content
+	 *
+	 * @return PDOStatement
+	 */
 	public function query($content) {
 		$this->log($content);
 
 		return parent::query($content);
 	}
 
+	/**
+	 * @param string $content
+	 *
+	 * @return PDOStatement
+	 */
 	public function prepare($content) {
 		$this->log($content);
 
@@ -143,6 +190,11 @@ class TPPPDO extends PDO {
 		return $prepare2;
 	}
 
+	/**
+	 * @param        $content
+	 * @param string $key
+	 * @param bool   $query
+	 */
 	public function log($content, $key = 'query', $query = true) {
 		if(TPP::is_debug()) {
 			$t = microtime(true);
