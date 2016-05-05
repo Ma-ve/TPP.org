@@ -7,37 +7,43 @@ class Credit extends Model {
 	 * @var integer
 	 */
 	public $id;
-	
+
 	/**
 	 * Name of credit
 	 * @var string
 	 */
 	public $name;
-	
+
 	/**
 	 * Title of credit person: creator, maintainer, response team
 	 * @var string
 	 */
 	public $title;
-	
+
 	/**
 	 * Pokémon of credit
 	 * @var string
 	 */
 	public $pokemon;
-	
+
 	/**
 	 * Quote of credit
 	 * @var string
 	 */
 	public $quote;
-	
+
 	/**
 	 * Generations of credit (0011101 or 1111111 etc)
 	 * @var integer
 	 */
 	public $generations;
-	
+
+	/**
+	 * Generations of credit (power of 2))
+	 * @var integer
+	 */
+	public $gen_flags;
+
 	/**
 	 * Link of credit (optional)
 	 * @var string
@@ -45,105 +51,95 @@ class Credit extends Model {
 	public $link;
 
 	/**
+	 * Contains all available generations
+	 * @var array
+	 */
+	public static $available_generations = [];
+
+	/**
+	 * Generate available generations
+	 */
+	public static function prepareGenerations() {
+		$getGenerations = TPP::db()->query("
+		SELECT `id`, `gen`, `name`, `short`
+		FROM `runs`
+		ORDER BY `id` ASC");
+
+		$i = 0;
+		while($gen = $getGenerations->fetch()) {
+			self::$available_generations[pow(2, $i++)] = [
+				'roman' => $gen['gen'],
+				'name' => $gen['name'],
+				'url' => $gen['short'],
+			];
+		}
+	}
+
+	/**
 	 * getCredits: Return all credits
 	 * @return		array		Array of all Credit objects
 	 */
 	public static function getCredits() {
+		self::prepareGenerations();
+
 		$getCredits = TPP::db()->query("
-			SELECT `id`, `name`, `title`, `pokemon`, `quote`, `generations`, `link`
+			SELECT `id`, `name`, `title`, `pokemon`, `quote`, `gen_flags`, `link`
 			FROM `credits`
 			WHERE `order_id` > 0
-			ORDER BY `order_id`, `id`")or die(TPP::db()->error);
+			AND `visible` = 1
+			ORDER BY `order_id`, `id`
+		")or die(TPP::db()->error);
+
 		while($credit = $getCredits->fetch()) {
 			$newCredit = new self();
 			$newCredit->setAttributes($credit);
-			$newCredit->quote = Credit::getQuote($newCredit->quote);
-			$newCredit->generations = self::getGenerations($newCredit->generations);
+			$newCredit->quote = self::getQuote($newCredit->quote);
+
+			$newCredit->generations = self::getGenerations((int) $newCredit->gen_flags);
 			$return[] = $newCredit;
 		}
+
 		return $return;
 	}
 
+	/**
+	 * @return string
+	 */
 	public function showImage() {
 		return parent::image('/pokemon/80', $this->pokemon);
 	}
 
+	/**
+	 * @param string $quote
+	 *
+	 * @return mixed
+	 */
 	private static function getQuote($quote) {
 		$quotes = explode('%%%', $quote);
 		$i = rand(0, count($quotes)-1);
-		return $quotes[$i];
+		return stripslashes($quotes[$i]);
 	}
 
+	/**
+	 * @param int $gens
+	 *
+	 * @return array
+	 */
 	private static function getGenerations($gens) {
-		for($i = 0; $i < strlen($gens); $i++) {
-			if((int) $gens[$i] !== 0) {
-				
-				$newObject = new StdClass();
-				$newObject->id = $i+1;
-				$newObject->roman = self::getRoman($i+1);
-				$newObject->name = self::getGenerationName($i+1);
+		$i = 0;
+		foreach(self::$available_generations as $key => $info) {
+			$key = str_replace('key', '', $key);
+			$i++;
+			if($gens & $key) {
+				$newObject = new stdClass();
+				$newObject->id = $i;
+				$newObject->roman = $info['roman'];
+				$newObject->name = 'Pok&eacute;mon ' . $info['name'];
 				$return[] = $newObject;
 			}
 		}
+
 		return $return;
 	}
-	
-	private static function getRoman($integer) { 
-		switch($integer) {
-			case 1: return 'I';
-			case 2: return 'II';
-			case 3: return 'III';
-			case 4: return 'III';
-			case 5: return 'IV';
-			case 6: return 'IV';
-			case 7: return 'V';
-			case 8: return 'V';
-			case 9: return 'VI';
-			case 10: return 'VI';
-			case 11: return 'I';
-			case 12: return 'VI';
-			case 13: return 'III';
-			case 14: return 'III';
-			case 15: return 'II';
-			default: return 'I';
-		}
-}
 
-	private static function getGenerationName($integer) {
-		switch($integer) {
-			case 0: return '-';
-			case 1: return 'Pok&eacute;mon Red';
-			case 2: return 'Pok&eacute;mon Crystal';
-			case 3: return 'Pok&eacute;mon Emerald';
-			case 4: return 'Pok&eacute;mon FireRed';
-			case 5: return 'Pok&eacute;mon Platinum';
-			case 6: return 'Pok&eacute;mon HeartGold';
-			case 7: return 'Pok&eacute;mon Black';
-			case 8: return 'Pok&eacute;mon Black 2';
-			case 9: return 'Pok&eacute;mon X';
-			case 10: return 'Pok&eacute;mon Omega Ruby';
-			case 11: return 'Pok&eacute;mon Red [Anniversary!]';
-			case 12: return 'Pok&eacute;mon Alpha Sapphire (Randomized)';
-			case 13: return 'Pok&eacute;mon Colosseum';
-			case 14: return 'Pok&eacute;mon XD: Gale of Darkness';
-			case 15: return 'Pok&eacute;mon Crystal [Anniversary!]';
-			default: return $integer;
-		}
-}
-
-function getGenString($gens) {
-	$i = 0;
-	$return = '';
-	for($j = 0; $j < strlen($gens); $j++) {
-		$i++;
-		if($gens[$j] != 0) {
-			$return .= '								--><span class="tpp-tooltip credits-generation gen' . $i . '" data-content="Mod for ' . getGenName($i) . '">' . getRoman($i) . '</span><!--
-';
-		}
-	}
-	$return2 = substr($return, 0, -6);
-	$return3 = substr($return2, 11);
-	
-	return '								' . $return3;
-}
 }
