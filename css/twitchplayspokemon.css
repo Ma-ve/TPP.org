@@ -584,6 +584,10 @@ table.e4-moves td {
 	width: 100px;
 }
 
+.milestone-100 + .milestone-name {
+	margin-left: 22px;
+}
+
 @media (max-width: 992px) {
 	.current-info.pull-right.text-right {
 		float: left !important;
