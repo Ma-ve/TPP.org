@@ -2,7 +2,7 @@
 foreach($items as $type => $items) { ?>
 
 				<div class="col-md-3">
-					<ul class="items">
+					<ul class="items js-items-height">
 						<li class="item-header"><strong><?= $type; ?></strong></li><?php
 	foreach($items as $item) { ?>
 
