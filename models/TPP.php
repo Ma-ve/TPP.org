@@ -19,7 +19,7 @@ class TPP {
 	 */
 	public static $main_path;
 
-	private static $errors;
+	private static $errors = [];
 	/**
 	 * @return TPP
 	 */

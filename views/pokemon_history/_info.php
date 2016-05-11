@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var $p Pokemon
+ */
 foreach($pokemon as $p) { ?>
 
 							<tr>
@@ -14,7 +17,7 @@ foreach($pokemon as $p) { ?>
 								<td style="height: 100px; line-height: 14px;"><?= $p->showImage([], 80); ?></td>
 								<td style="height: 100px; line-height: 14px;">
 									<ul class="pokemon-moves text-left">
-										<li><strong>Level <?= $p->level; ?></strong></li><?php
+										<li><strong>Level <?= $p->level == 0 ? '?' : $p->level; ?></strong></li><?php
 	if(isset($p->moves)) {
 		foreach($p->moves as $move) { ?>
 										
@@ -25,6 +28,10 @@ foreach($pokemon as $p) { ?>
 									</ul>
 								</td>
 								<td style="height: 100px; line-height: 14px;" class="history-status history-<?= $p->getHistoryColour(); ?>">
-									<span><?= $p->status; ?> <?= $p->getHistoryStatusText(); ?> <?= isset($p->evohatch) ? '<em>' . $p->evohatch . '</em>:' : ''; ?> <?= $p->comment; ?></span></td>
+									<span><?= $p->status; ?> <?php
+										if($p->evohatch != '') {
+											echo $p->getHistoryStatusText() . ' <em>' . $p->evohatch . '</em>';
+										}
+										echo ' ' . $p->getComment(); ?></span></td>
 							</tr><?php
 }
