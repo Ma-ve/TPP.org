@@ -28,6 +28,21 @@ function toggleIcon(s) {
 }
 
 $(function() {
+	setTimeout(function() {
+
+		$('.js-items-height').each(function() {
+			if($(this).height() > 300) {
+				$(this).addClass('items-height relative');
+				$(this).append('<span class="js-items-show-more items-show-more">Show more&hellip;</span>');
+			}
+		});
+	}, 500);
+
+	$('body').on('click', '.js-items-show-more', function() {
+		$(this).parent().removeClass('items-height');
+		$(this).remove();
+	});
+
 	if($.cookie('more_info') == 1) {
 		$('.pokemon-more-info').show();
 		$('.pokemon-more-info-click').text('-');
