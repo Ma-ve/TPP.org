@@ -1,6 +1,7 @@
 <?php
 
-class Pokemon extends Model {
+class Pokemon extends Model
+{
 
 	const BOXES_ROWS = 4;
 	const BOXES_COLS = 5;
@@ -15,19 +16,39 @@ class Pokemon extends Model {
 	public $hold_item;
 	public $status;
 	public $box;
+	public $moves;
+	public $characteristic;
+	public $ability;
+	public $type1;
+	public $type2;
+	public $time_obtained;
+	public $evolves_level;
+	public $has_pokerus;
+	public $evolves_method;
+	public $evohatch;
+	public $evohatch_linked;
+	public $comment;
+	public $next_move;
+	public $next_move_level;
+
+	public static function getPartyPokemon() {
+		return Pokemon::getPokemon('p.`status` = 1', `party_order`, '6');
+	}
 
 	public static function getPokemon($where = null, $order = null, $limit = null) {
 		if(!is_null($where)) {
 			$where = ' WHERE ' . $where;
-		} if(!is_null($order)) {
+		}
+		if(!is_null($order)) {
 			$order = ' ORDER BY ' . $order;
-		} if(!is_null($limit)) {
+		}
+		if(!is_null($limit)) {
 			$limit = ' LIMIT ' . $limit;
 		}
 		$getPokemon = TPP::db()->query("SELECT
 			p.`id`, p.`pokemon`, p.`name`, p.`level`, p.`nickname`, p.`gender`, p.`hold_item`, p.`status`, p.`box_id`, p.`poke_ball`, p.`comment`,
-			GROUP_CONCAT(DISTINCT m.`name` SEPARATOR ',') as `moves`,
-			s.`status` as `status_name`
+			GROUP_CONCAT(DISTINCT m.`name` SEPARATOR ',') AS `moves`,
+			s.`status` AS `status_name`
 			FROM `pokemon` p
 			LEFT JOIN `move` m
 			ON m.`pokemon` = p.`id`
@@ -37,19 +58,19 @@ class Pokemon extends Model {
 		while($pok = $getPokemon->fetch()) {
 			$newPokemon = new self();
 			$newPokemon->setAttributes([
-				'id' => $pok['id'],
-				'name' => $newPokemon->setName($pok['name'], $pok['pokemon']),
-				'pokemon' => $newPokemon->setPokemon($pok['pokemon']),
-				'level' => $newPokemon->setLevel($pok['level']),
-				'nickname' => $newPokemon->setNickname($pok['nickname']),
-				'poke_ball' => $newPokemon->setPokeBall($pok['poke_ball']),
-				'gender' => $newPokemon->setGender($pok['gender']),
-				'hold_item' => $newPokemon->setHoldItem($pok['hold_item']),
-				'box' => (int) $pok['box_id'],
-				'status' => $pok['status_name'],
-				'comment' => FuncHelp::getDateTime($pok['comment']),
-				'moves' => $newPokemon->setMoves($pok['moves']),
-			]);
+										   'id'        => $pok['id'],
+										   'name'      => $newPokemon->setName($pok['name'], $pok['pokemon']),
+										   'pokemon'   => $newPokemon->setPokemon($pok['pokemon']),
+										   'level'     => $newPokemon->setLevel($pok['level']),
+										   'nickname'  => $newPokemon->setNickname($pok['nickname']),
+										   'poke_ball' => $newPokemon->setPokeBall($pok['poke_ball']),
+										   'gender'    => $newPokemon->setGender($pok['gender']),
+										   'hold_item' => $newPokemon->setHoldItem($pok['hold_item']),
+										   'box'       => (int)$pok['box_id'],
+										   'status'    => $pok['status_name'],
+										   'comment'   => FuncHelp::getDateTime($pok['comment']),
+										   'moves'     => $newPokemon->setMoves($pok['moves']),
+									   ]);
 
 			$return[$newPokemon->id] = $newPokemon;
 		}
@@ -58,14 +79,68 @@ class Pokemon extends Model {
 		return $return;
 	}
 
-	public function __get($name) {
-		return isset($this->$name) ? $this->$name : null;
+	public function setName($name, $pokemon) {
+		return !empty($name)
+			? str_replace([' ', '\Pk'], ['&nbsp;', '<img src="/img/pk.png" title="" alt="">'],
+						  stripslashes(FuncHelp::utf8ify($name)))
+			: FuncHelp::utf8ify($pokemon);
 	}
 
-	public function __set($name, $value) {
-		if(isset($this->$name)) {
-			$this->$name = $value;
+	public function setPokemon($pokemon) {
+		return FuncHelp::utf8ify($pokemon);
+	}
+
+	public function setLevel($level) {
+		return $level !== 0 ? $level : '?';
+	}
+
+	public function setNickname($nickname) {
+		return isset($nickname) ? stripslashes(utf8_encode($nickname)) : 'No nickname';
+	}
+
+	public function setPokeBall($poke_ball) {
+		if($poke_ball) {
+			$item = new Item();
+			$item->setName($poke_ball);
+
+			return $item;
 		}
+		unset($this->poke_ball);
+	}
+
+	public function setGender($gender) {
+		if($gender) {
+			return $this->getGender($gender);
+		}
+		unset($this->gender);
+	}
+
+	private function getGender($g) {
+		return $g;
+	}
+
+	public function setHoldItem($hold_item) {
+		if($hold_item) {
+			$item = new Item();
+			$item->setName($hold_item);
+
+			return $item;
+		}
+		unset($this->hold_item);
+	}
+
+	public function setMoves($moves) {
+		if($moves) {
+			$ex = explode(',', $moves);
+			foreach($ex as $m) {
+				$model       = new Move();
+				$model->name = $m;
+				$return[]    = $model;
+			}
+
+			return $return;
+		}
+
 	}
 
 	public static function getFieldsAll(array &$pokemon) {
@@ -89,11 +164,12 @@ class Pokemon extends Model {
 		AND
 			pfe.`field_id` = f.`id`
 		ORDER BY
-			pfe.`pokemon_id` DESC");
+			pfe.`pokemon_id` DESC")
+		;
 
 		$getFields->execute($in_query);
 
-		$i = 0;
+		$i              = 0;
 		$pokemon_fields = [];
 		while($fi = $getFields->fetch()) {
 			$pokemon_fields[$fi['pokemon_id']][$fi['name']] = $fi['value'];
@@ -105,7 +181,7 @@ class Pokemon extends Model {
 			 * @var $pok Pokemon
 			 */
 			if(isset($fields['next_move'])) {
-				$move = new Move();
+				$move       = new Move();
 				$move->name = $fields['next_move'];
 				unset($fields['next_move']);
 				if(isset($fields['next_move_level'])) {
@@ -120,98 +196,6 @@ class Pokemon extends Model {
 		return $pokemon;
 	}
 
-
-	public function getFields() {
-		$fields = [];
-		$getFields = TPP::db()->query("
-		SELECT
-			f.`name`,
-			pfe.`pokemon_id`,
-			pfe.`value`
-		FROM
-			`pokemon_field_eav` pfe,
-			`field` f
-		WHERE
-			pfe.`pokemon_id` = $this->id
-		AND
-			pfe.`field_id` = f.`id`");
-		$i = 0;
-		while($fi = $getFields->fetch()) {
-			$fields[$fi['name']] = $fi['value'];
-		}
-		if(isset($fields['next_move'])) {
-			$move = new Move();
-			$move->name = $fields['next_move'];
-			unset($fields['next_move']);
-			if(isset($fields['next_move_level'])) {
-				$move->level = $fields['next_move_level'];
-				unset($fields['next_move_level']);
-			}
-			$fields['next_move'] = $move;
-		}
-		return $fields;
-	}
-
-	public function setName($name, $pokemon) {
-		return !empty($name)
-		? str_replace([' ', '\Pk'], ['&nbsp;', '<img src="/img/pk.png" title="" alt="">'], stripslashes(FuncHelp::utf8ify($name)))
-		: FuncHelp::utf8ify($pokemon);
-	}
-
-	public function setPokemon($pokemon) {
-		return FuncHelp::utf8ify($pokemon);
-	}
-
-	public function setLevel($level) {
-		return $level !== 0 ? $level : '?';
-	}
-
-	public function setNickname($nickname) {
-		return isset($nickname) ? stripslashes(utf8_encode($nickname)) : 'No nickname';
-	}
-
-	public function setPokeBall($poke_ball) {
-		if($poke_ball) {
-			$item = new Item();
-			$item->setName($poke_ball);
-			return $item;
-		}
-		unset($this->poke_ball);
-	}
-
-	public function setGender($gender) {
-		if($gender) {
-			return $this->getGender($gender);
-		}
-		unset($this->gender);
-	}
-
-	public function setHoldItem($hold_item) {
-		if($hold_item) {
-			$item = new Item();
-			$item->setName($hold_item);
-			return $item;
-		}
-		unset($this->hold_item);
-	}
-
-	public function setMoves($moves) {
-		if($moves) {
-			$ex = explode(',', $moves);
-			foreach($ex as $m) {
-				$model = new Move();
-				$model->name = $m;
-				$return[] = $model;
-			}
-			return $return;
-		}
-		unset($this->moves);
-	}
-
-	public static function getPartyPokemon() {
-		return Pokemon::getPokemon('p.`status` = 1', `party_order`, '6');
-	}
-
 	public static function getBoxPokemon() {
 		return Pokemon::getPokemon('p.`status` = 2', '`id` DESC');
 	}
@@ -224,15 +208,56 @@ class Pokemon extends Model {
 		return Pokemon::getPokemon('p.`status` NOT IN(1,2,6,9)', '`comment` DESC');
 	}
 
-	private function getGender($g) {
-		return $g;
+	public function __get($name) {
+		return isset($this->$name) ? $this->$name : null;
+	}
+
+	public function __set($name, $value) {
+		if(isset($this->$name)) {
+			$this->$name = $value;
+		}
+	}
+
+	public function getFields() {
+		$fields    = [];
+		$getFields = TPP::db()->query("
+		SELECT
+			f.`name`,
+			pfe.`pokemon_id`,
+			pfe.`value`
+		FROM
+			`pokemon_field_eav` pfe,
+			`field` f
+		WHERE
+			pfe.`pokemon_id` = $this->id
+		AND
+			pfe.`field_id` = f.`id`")
+		;
+		$i         = 0;
+		while($fi = $getFields->fetch()) {
+			$fields[$fi['name']] = $fi['value'];
+		}
+		if(isset($fields['next_move'])) {
+			$move       = new Move();
+			$move->name = $fields['next_move'];
+			unset($fields['next_move']);
+			if(isset($fields['next_move_level'])) {
+				$move->level = $fields['next_move_level'];
+				unset($fields['next_move_level']);
+			}
+			$fields['next_move'] = $move;
+		}
+
+		return $fields;
 	}
 
 	public function beautifyGender() {
 		if(isset($this->gender)) {
 			$return = $this->gender == 'm' ? '4' : '2';
+
 			return ' <span class="gender">(&#979' . $return . ';)</span>';
 		}
+
 		return null;
 	}
 
@@ -244,16 +269,18 @@ class Pokemon extends Model {
 		if($pokemon == 'Jellicent' && $this->gender == 'f') {
 			$pokemon = 'Jellicent-Female';
 		}
+
 		return parent::image($path, $pokemon, $htmlOptions);
 	}
 
 	public function showImageMenu($htmlOptions = []) {
-		$path = '/pokemon/sprites/menu-static';
+		$path    = '/pokemon/sprites/menu-static';
 		$pokemon = $this->pokemon;
 
 		if($pokemon == 'Jellicent' && $this->gender == 'f') {
 			$pokemon = 'Jellicent-Female';
 		}
+
 		return parent::image($path, $pokemon, $htmlOptions);
 	}
 
@@ -262,6 +289,7 @@ class Pokemon extends Model {
 		$addToImage .= isset($this->season) ? '_' . $this->season : '';
 		$addToImage .= isset($this->gender) ? '_' . $this->gender : '';
 		$addToImage .= isset($this->is_shiny) ? '_s' : '';
+
 		return parent::image('/pokemon/sprites/' . TWITCHVERSION, $this->pokemon . $addToImage, $htmlOptions);
 	}
 
@@ -271,8 +299,8 @@ class Pokemon extends Model {
 		}
 
 		$return = '';
-		$array = explode('%', $this->nickname);
-		$i = 0;
+		$array  = explode('%', $this->nickname);
+		$i      = 0;
 		if($this->nickname == 'No nickname') {
 			return '<em>' . $this->nickname . '</em>';
 		} else {
@@ -299,15 +327,20 @@ class Pokemon extends Model {
 				}
 			}
 		}
+
 		return $return;
 	}
 
 	public function getHistoryStatusText() {
 		switch($this->status) {
-			case 'Traded': return 'for';
-			case 'Evolved': return 'into';
-			case 'Hatched': return 'into';
-			default: return null;
+			case 'Traded':
+				return 'for';
+			case 'Evolved':
+				return 'into';
+			case 'Hatched':
+				return 'into';
+			default:
+				return null;
 		}
 	}
 
@@ -323,8 +356,8 @@ class Pokemon extends Model {
 		return $this->nature;
 	}
 
-        public function getCharacteristicDescription() {
-                return $this->characteristic;
-        }
+	public function getCharacteristicDescription() {
+		return $this->characteristic;
+	}
 
 }

@@ -19,6 +19,7 @@ class TPP {
 	 */
 	public static $main_path;
 
+	private static $errors;
 	/**
 	 * @return TPP
 	 */
@@ -30,9 +31,6 @@ class TPP {
 		return self::$instance;
 	}
 
-	/**
-	 *
-	 */
 	public static function initializeConnection() {
 		$db = self::getInstance();
 		$db_opts = [
@@ -64,13 +62,19 @@ class TPP {
 	 *
 	 */
 	public static function end() {
+		if(TPP_DEBUG) {
+			echo '<pre style="text-align: left;">';
+			var_dump(self::getErrors());
+			echo '</pre>';
+		}
+
 		if(self::is_debug()) {
 
-			if(isset($GLOBALS['log']['query'])) {
-				echo '<h1>Queries (' . count($GLOBALS['log']['query']) . ')</h1>';
+			foreach($GLOBALS['log'] as $key => $logs_container) {
+				echo '<h1>' . ucfirst($key) . ' (' . count($GLOBALS['log'][$key]) . ')</h1>';
 				echo '<table class="tpp-debug-table">';
 				$i_log = 1;
-				foreach($GLOBALS['log']['query'] as $logs) {
+				foreach($logs_container as $logs) {
 					echo '<tr>
 ';
 					echo '<td>' . $i_log++ . '</td>';
@@ -80,7 +84,9 @@ class TPP {
 							if($log instanceof PDOStatement) {
 								ob_start();
 								$log->debugDumpParams();
-								$log = '<pre>' . ob_get_clean() . '</pre>';
+								$log = '<div style="height: 200px; overflow-y: scroll;">'
+								   . '<pre>' . ob_get_clean() . '</pre>'
+								   . '</div>';
 							} elseif(is_array($log)) {
 								$log = implode('</td><td>', $log);
 							} else {
@@ -92,7 +98,7 @@ class TPP {
 							exit;
 						}
 
-						echo '<td>' .  $log. '</td>';
+						echo '<td>' . $log . '</td>';
 					}
 					echo '<tr>
 ';
@@ -100,31 +106,6 @@ class TPP {
 				echo '</table>';
 			}
 
-			if(isset($GLOBALS['log']['prepare'])) {
-				echo '<h1>Prepare (' . count($GLOBALS['log']['prepare']) . ')</h1>';
-				echo '<table class="tpp-debug-table">';
-				$i_log = 1;
-				foreach($GLOBALS['log']['prepare'] as $logs) {
-					echo '<tr>
-';
-					echo '<td>' . $i_log++ . '</td>';
-					foreach($logs as $log) {
-						echo PHP_EOL;
-						if($log instanceof PDOStatement) {
-							ob_start();
-							$log->debugDumpParams();
-							$log = '<div style="height: 200px; overflow-y: scroll;">'
-								   . '<pre>' . ob_get_clean() . '</pre>'
-								   . '</div>';
-						}
-
-						echo '<td>' .  $log. '</td>';
-					}
-					echo '<tr>
-';
-				}
-				echo '</table>';
-			}
 		}
 	}
 
@@ -144,6 +125,23 @@ class TPP {
 		$return = [];
 		foreach($params as $p) {
 			$return[':n' . $p] = $p;
+		}
+
+		return $return;
+	}
+
+	public static function setError($error) {
+		self::$errors[] = $error;
+	}
+
+	public static function getErrors() {
+		$return = [];
+		foreach(self::$errors as $er) {
+			if(isset($return[$er])) {
+				$return[$er]++;
+			} else {
+				$return[$er] = 1;
+			}
 		}
 
 		return $return;
@@ -217,4 +215,5 @@ class TPPPDO extends PDO {
 			];
 		}
 	}
+
 }
