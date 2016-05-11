@@ -323,12 +323,6 @@ ul.pokemon-moves {
 	/*border: 1px solid #ddd;*/
 	padding-top: 8px;
 }
-/*
-.credits .first,
-.credits .third { border-right: 0; }
-.credits .third,
-.credits .fourth { border-top: 0; }*/
-
 
 .credits .quote {
 	font-style: italic;
@@ -535,6 +529,7 @@ table.e4-moves td {
 	margin-bottom: 20px;
 	min-height: 117px;
 	padding-left: 10px;
+	width: 156px;
 }
 
 .bg-forest	{ background-image: url('/img/boxes/e/forest.png'); }
@@ -770,19 +765,16 @@ table.e4-moves td {
 
 
 
-.table-bordered {
-	border-left: 0;
-	border-right: 0;
-	border-top: 1px solid #ddd !important;
-	border-bottom: 1px solid #ddd !important;
+.table-bordered table {
+	border: 0 !important;
 }
 
 .table-bordered tr:not(.spacer) th:first-child,
 .table-bordered tr:not(.spacer) td:first-child {
-	border-left: 1px solid #ddd;
+	/*border-left: 1px solid #ddd;*/
 }
 
 .table-bordered tr:not(.spacer) th:last-child,
 .table-bordered tr:not(.spacer) td:last-child {
-	border-right: 1px solid #ddd;
+	/*border-right: 1px solid #ddd;*/
 }

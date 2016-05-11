@@ -32,10 +32,10 @@ class Pokemon extends Model
 	public $next_move_level;
 
 	public static function getPartyPokemon() {
-		return Pokemon::getPokemon('p.`status` = 1', `party_order`, '6');
+		return Pokemon::queryPokemon('p.`status` = 1', `party_order`, '6');
 	}
 
-	public static function getPokemon($where = null, $order = null, $limit = null) {
+	public static function queryPokemon($where = null, $order = null, $limit = null) {
 		if(!is_null($where)) {
 			$where = ' WHERE ' . $where;
 		}
@@ -54,7 +54,7 @@ class Pokemon extends Model
 			ON m.`pokemon` = p.`id`
 			JOIN `status` s
 			ON s.`id` = p.`status`
-			" . $where . " GROUP BY p.`id`" . $order . $limit) or die(TPP::db()->error);
+			" . $where . " GROUP BY p.`id`" . $order . $limit) or die(TPP::db()->errorInfo());
 		while($pok = $getPokemon->fetch()) {
 			$newPokemon = new self();
 			$newPokemon->setAttributes([
@@ -131,6 +131,7 @@ class Pokemon extends Model
 
 	public function setMoves($moves) {
 		if($moves) {
+			$return = [];
 			$ex = explode(',', $moves);
 			foreach($ex as $m) {
 				$model       = new Move();
@@ -169,7 +170,6 @@ class Pokemon extends Model
 
 		$getFields->execute($in_query);
 
-		$i              = 0;
 		$pokemon_fields = [];
 		while($fi = $getFields->fetch()) {
 			$pokemon_fields[$fi['pokemon_id']][$fi['name']] = $fi['value'];
@@ -197,24 +197,33 @@ class Pokemon extends Model
 	}
 
 	public static function getBoxPokemon() {
-		return Pokemon::getPokemon('p.`status` = 2', '`id` DESC');
+		return Pokemon::queryPokemon('p.`status` = 2', '`id` DESC');
 	}
 
 	public static function getDaycarePokemon() {
-		return Pokemon::getPokemon('p.`status` = 6', '`id` DESC');
+		return Pokemon::queryPokemon('p.`status` = 6', '`id` DESC');
 	}
 
 	public static function getHistoryPokemon() {
-		return Pokemon::getPokemon('p.`status` NOT IN(1,2,6,9)', '`comment` DESC');
+		return Pokemon::queryPokemon('p.`status` NOT IN(1,2,6,9)', '`comment` DESC');
 	}
 
 	public function __get($name) {
-		return isset($this->$name) ? $this->$name : null;
+		if(isset($this->$name)) {
+			if(method_exists($this, $method = 'get' . ucfirst($name))) {
+				return $this->$method();
+			}
+			return $this->$name;
+		}
 	}
 
 	public function __set($name, $value) {
 		if(isset($this->$name)) {
-			$this->$name = $value;
+			if(method_exists($this, $method = 'set' . ucfirst($name))) {
+				$this->$method($value);
+			} else {
+				$this->$name = $value;
+			}
 		}
 	}
 
@@ -233,7 +242,7 @@ class Pokemon extends Model
 		AND
 			pfe.`field_id` = f.`id`")
 		;
-		$i         = 0;
+
 		while($fi = $getFields->fetch()) {
 			$fields[$fi['name']] = $fi['value'];
 		}
@@ -360,4 +369,11 @@ class Pokemon extends Model
 		return $this->characteristic;
 	}
 
+	public function getComment($secs = false) {
+		if(is_numeric($this->comment)) {
+			return FuncHelp::getDateTime($this->comment, $secs);
+		}
+
+		return $this->comment;
+	}
 }
