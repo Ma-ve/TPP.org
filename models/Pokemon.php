@@ -54,7 +54,10 @@ class Pokemon extends Model
 			ON m.`pokemon` = p.`id`
 			JOIN `status` s
 			ON s.`id` = p.`status`
-			" . $where . " GROUP BY p.`id`" . $order . $limit) or die(TPP::db()->errorInfo());
+			" . $where . " GROUP BY p.`id`" . $order . $limit);
+
+		$return = [];
+
 		while($pok = $getPokemon->fetch()) {
 			$newPokemon = new self();
 			$newPokemon->setAttributes([
