@@ -66,12 +66,14 @@ class Credit extends Model {
 		ORDER BY `id` ASC");
 
 		$i = 0;
-		while($gen = $getGenerations->fetch()) {
-			self::$available_generations[pow(2, $i++)] = [
-				'roman' => $gen['gen'],
-				'name' => $gen['name'],
-				'url' => $gen['short'],
-			];
+		if($getGenerations) {
+			while($gen = $getGenerations->fetch()) {
+				self::$available_generations[pow(2, $i++)] = [
+					'roman' => $gen['gen'],
+					'name'  => $gen['name'],
+					'url'   => $gen['short'],
+				];
+			}
 		}
 	}
 
@@ -88,15 +90,18 @@ class Credit extends Model {
 			WHERE `order_id` > 0
 			AND `visible` = 1
 			ORDER BY `order_id`, `id`
-		")or die(TPP::db()->error);
+		");
 
-		while($credit = $getCredits->fetch()) {
-			$newCredit = new self();
-			$newCredit->setAttributes($credit);
-			$newCredit->quote = self::getQuote($newCredit->quote);
+		$return = [];
+		if($getCredits) {
+			while($credit = $getCredits->fetch()) {
+				$newCredit = new self();
+				$newCredit->setAttributes($credit);
+				$newCredit->quote = self::getQuote($newCredit->quote);
 
-			$newCredit->generations = self::getGenerations((int) $newCredit->gen_flags);
-			$return[] = $newCredit;
+				$newCredit->generations = self::getGenerations((int)$newCredit->gen_flags);
+				$return[]               = $newCredit;
+			}
 		}
 
 		return $return;

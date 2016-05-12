@@ -41,6 +41,7 @@ class TPP {
 				PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES 'utf8'",
 				PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
 				PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
+				PDO::ATTR_STATEMENT_CLASS => TPP_DEBUG ? ['TPPPDOStatement', []] : ['PDOStatement'],
 			],
 		];
 
@@ -130,18 +131,21 @@ class TPP {
 		return $return;
 	}
 
+	/**
+	 * @param string|Exception $error
+	 */
 	public static function setError($error) {
-		self::$errors[] = $error;
+		if($error instanceof \Exception) {
+			self::$errors[] = str_replace(TPP::$main_path, '', $error->getFile()) . ':' . $error->getLine() . ' - ' . $error->getMessage() . "\n" . $error->getTraceAsString();
+		} else {
+			self::$errors[] = $error;
+		}
 	}
 
 	public static function getErrors() {
 		$return = [];
 		foreach(self::$errors as $er) {
-			if(isset($return[$er])) {
-				$return[$er]++;
-			} else {
-				$return[$er] = 1;
-			}
+			$return[] = $er;
 		}
 
 		return $return;
@@ -170,7 +174,12 @@ class TPPPDO extends PDO {
 	public function query($content) {
 		$this->log($content);
 
-		return parent::query($content);
+		try {
+			return parent::query($content);
+		} catch(Exception $e) {
+			TPP::setError($e);
+			return false;
+		}
 	}
 
 	/**
@@ -179,13 +188,18 @@ class TPPPDO extends PDO {
 	 * @return PDOStatement
 	 */
 	public function prepare($content) {
-		$this->log($content);
+		try {
+			$this->log($content);
 
-		$prepare = parent::prepare($content);
-		$prepare2 = &$prepare;
-		$this->log($prepare2, 'prepare', false);
+			$prepare  = parent::prepare($content);
+			$prepare2 = &$prepare;
+			$this->log($prepare2, 'prepare', false);
 
-		return $prepare2;
+			return $prepare2;
+		} catch(Exception $e) {
+			TPP::setError($e);
+		}
+
 	}
 
 	/**
@@ -213,6 +227,22 @@ class TPPPDO extends PDO {
 				(new DateTime(date("Y-m-d H:i:s." . $micro, $t)))->format('Y-m-d H:i:s.u'),
 				$query ? SqlFormatter::highlight($content) : $content,
 			];
+		}
+	}
+
+}
+
+class TPPPDOStatement extends PDOStatement {
+
+	protected function __construct() {
+
+	}
+
+	public function execute(array $input_parameters = null) {
+		try {
+			 parent::execute($input_parameters);
+		} catch(Exception $e) {
+			TPP::setError($e);
 		}
 	}
 

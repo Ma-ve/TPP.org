@@ -14,7 +14,11 @@ class Box extends Model {
 	
 	public static function getBoxes() {
 		$return = [];
-		$getBoxes = TPP::db()->query("SELECT `id`, `name`, `scenery`, `active` FROM `box` ORDER BY `id`")or die(TPP::db()->error);
+		$getBoxes = TPP::db()->query("SELECT `id`, `name`, `scenery`, `active` FROM `box` ORDER BY `id`");
+		if(!$getBoxes) {
+			return false;
+		}
+
 		while($box = $getBoxes->fetch()) {
 			$newBox = new self();
 			$newBox->setAttributes($box);

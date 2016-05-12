@@ -532,6 +532,12 @@ table.e4-moves td {
 	width: 156px;
 }
 
+.box-background a {
+	display: inline-block;
+	width: 28px;
+	height: 26px;
+}
+
 .bg-forest	{ background-image: url('/img/boxes/e/forest.png'); }
 .bg-city	{ background-image: url('/img/boxes/e/city.png'); }
 .bg-desert	{ background-image: url('/img/boxes/e/desert.png'); }

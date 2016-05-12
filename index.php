@@ -5,10 +5,10 @@ includes();
 
 new Init();
 
-//if(TPP_DEBUG) {
+if(TPP_DEBUG) {
 	error_reporting(E_ALL);
 	ini_set('display_errors', 1);
-//}
+}
 
 TPP::initializeConnection();
 
@@ -16,10 +16,12 @@ $site = new SiteController();
 $site->actionIndex();
 
 echo '<h1>loaded in ' . round(microtime(true) - $time, 7) . ' secs</h1>';
-exit();
+exit;
 
 function prioIncludes() {
-	require("vendor/autoload.php");
+	if(file_exists('vendor/autoload.php')) {
+		require("vendor/autoload.php");
+	}
 
 	$priorityIncludes = [
 		'helpers' => [

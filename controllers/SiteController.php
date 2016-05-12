@@ -71,7 +71,11 @@ class SiteController extends Controller
 	 */
 	private function initOrderBoxPokemon($box_pokemon) {
 		$boxes = [];
-		foreach(Box::getBoxes() as $box) {
+		$getBoxes = Box::getBoxes();
+
+		if(!$getBoxes) return [];
+
+		foreach($getBoxes as $box) {
 			$boxes[$box->id] = $box;
 		}
 
