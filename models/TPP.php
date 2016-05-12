@@ -240,7 +240,7 @@ class TPPPDOStatement extends PDOStatement {
 
 	public function execute(array $input_parameters = null) {
 		try {
-			 parent::execute($input_parameters);
+			 return parent::execute($input_parameters);
 		} catch(Exception $e) {
 			TPP::setError($e);
 		}
