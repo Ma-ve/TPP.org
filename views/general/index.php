@@ -1,3 +1,9 @@
+<?php
+
+use TPP\Models\Image;
+use TPP\Helpers\Helper;
+
+?>
 
 			<div class="tpp-app tpp-app-header">
 				<div class="page-header">
@@ -7,7 +13,7 @@
 						--></a><!--
 						--><a href="" class="pop-out btn btn-danger btn-xs"><i class="fa fa-expand"></i>Pop out</a>
 
-						<span class="pull-right last-update">Last update: <?= FuncHelp::getDateTime($general->last_update); ?></span>
+						<span class="pull-right last-update">Last update: <?= Helper::getDateTime($general->last_update); ?></span>
 					</h1><?php
 	if(!empty($messages)) {
 		$this->render('general/_messages', ['messages' => $messages]);
@@ -18,7 +24,7 @@
 				<p>Optional Goal: <strong><?= !empty($general->optional_goal) ? utf8_decode($general->optional_goal) : '-'; ?></strong></p>
 				<p>Current Location: <strong><?= utf8_decode($general->current_location); ?></strong></p>
 				<p>Current Pok&eacute;center: <strong><?= utf8_decode($general->current_pokecenter); ?></strong></p>
-				<p>Money in hand: <strong><?= Image::toImage('/items', 'pokedollar', ['title' => 'Pok&eacute;dollar', 'title' => 'Pok&eacute;dollar']); ?><?= $general->money; ?></strong></p>
+				<p>Money in hand: <strong><?= Image::toImage('/items', 'pokedollar', ['title' => 'Pok&eacute;dollar', 'alt' => 'Pok&eacute;dollar']); ?><?= $general->money; ?></strong></p>
 			</div>
 					<div class="current-info pull-right text-right">
 						<p>Before this, we played Pok&eacute;mon:</p>

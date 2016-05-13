@@ -1,13 +1,18 @@
 {
     "name": "ma-ve/twitchplayspokemon",
-    "require-dev": {
-        "jdorn/sql-formatter": "^1.2"
-    },
     "authors": [
         {
             "name": "Mave",
             "email": "info@mave.me"
         }
     ],
-    "require": {}
+    "require": {},
+    "require-dev": {
+        "jdorn/sql-formatter": "^1.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "TPP\\":"src/"
+        }
+    }
 }

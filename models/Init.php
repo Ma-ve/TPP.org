@@ -14,7 +14,7 @@ class Init {
 			define('TWITCHVERSION', isset($_SERVER['VERSION']) ? $_SERVER['VERSION'] : $_SERVER['REDIRECT_VERSION']);
 		}
 
-		register_shutdown_function(['TPP', 'end']);
+		register_shutdown_function(['TPP\Models\TPP', 'end']);
 	}
 
 	private function loadConfig($arr) {

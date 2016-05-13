@@ -1,4 +1,9 @@
 <?php
+
+use TPP\Models\TPP;
+
+require("vendor/autoload.php");
+
 $time = microtime(true);
 prioIncludes();
 includes();
@@ -19,21 +24,14 @@ echo '<h1>loaded in ' . round(microtime(true) - $time, 7) . ' secs</h1>';
 exit;
 
 function prioIncludes() {
-	if(file_exists('vendor/autoload.php')) {
-		require("vendor/autoload.php");
-	}
-
 	$priorityIncludes = [
-		'helpers' => [
-			'ErrorHandler',
-		],
 		'controllers' => [
 			'Controller',
 		],
 		'models' => [
-			'TPP',
-			'Model',
-		]];
+			'Init',
+		],
+	];
 
 	foreach($priorityIncludes as $key => $prio) {
 		foreach($prio as $pr) {

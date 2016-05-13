@@ -1,5 +1,15 @@
 <?php
 
+use TPP\Models\Badge;
+use TPP\Models\Box;
+use TPP\Models\Credit;
+use TPP\Models\EliteFour;
+use TPP\Models\Fact;
+use TPP\Models\Item;
+use TPP\Models\Milestone;
+use TPP\Models\Pokemon;
+use TPP\Models\TPP;
+
 class SiteController extends Controller
 {
 
@@ -19,10 +29,10 @@ class SiteController extends Controller
 
 		$badges = Badge::getBadges(null, 'LIMIT 0, 8');
 
-		if($badges['obtained'] == 8) {
-//			$this->render('elitefour/index', [
-//				EliteFour::getEliteFour(),
-//			]);
+		if($badges['obtained'] >= 8) {
+			$this->render('elitefour/index', [
+				'elitefour' => EliteFour::getEliteFour('is_rematch = 0'), //@TODO: remove
+			]);
 		}
 		$this->render('badge/index', [
 			'badges' => $badges,
@@ -162,6 +172,8 @@ class SiteController extends Controller
 
 			return $return;
 		}
+
+		return [];
 	}
 
 }
