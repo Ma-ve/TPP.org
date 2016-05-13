@@ -1,5 +1,7 @@
 <?php
 
+namespace TPP\Models;
+
 class Box extends Model {
 	
 	public $id;

@@ -1,3 +1,7 @@
+<?php
+
+use \TPP\Models\Image;
+?>
 
 					<tr><?php
 foreach($pokemon as $p) { ?>

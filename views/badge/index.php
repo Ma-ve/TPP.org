@@ -9,7 +9,7 @@ $this->render('badge/_general', ['obtained' => $badges['obtained']]); ?>
 	$this->render('badge/_image', ['badges' => $badges]);
 	$this->render('badge/_time', ['badges' => $badges]);
 	$this->render('badge/_attempts', ['badges' => $badges]);
-	$this->render('badge/leader/index', ['badges' => $badges]); ?>
+	$this->render('trainer/index', ['trainers' => array_map(function($b) { return $b->leader; }, $badges)]); ?>
 
 					</table>
 				</div>

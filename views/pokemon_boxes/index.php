@@ -1,8 +1,12 @@
 <?php
+
+use TPP\Helpers\Helper;
+
 /**
  * @var $boxes	Boxes[]
  */
 ?>
+
 			<div class="tpp-app tpp-app-pokemon-boxes tpp-app-hidden"><?php
 $this->render('pokemon_boxes/_general'); ?>
 
@@ -27,7 +31,7 @@ foreach($chunks as $chunk) { ?>
 							<?= !empty($box->content) ? '<small>(' . count($box->pokemon) . ' Pok&eacute;mon)</small>' : ''; ?>
 
 						</h5>
-						<div class="box-background bg-<?= FuncHelp::safeName($box->scenery); ?>">
+						<div class="box-background bg-<?= Helper::safeName($box->scenery); ?>">
 							<?php
 		if(empty($box->pokemon)) { ?>
 
