@@ -6,7 +6,7 @@ foreach($trainers as $t) { ?>
 							<ul class="pokemon-moves text-left"><?php
 	foreach($t->pokemon as $pokemon) { ?>
 
-								<li><?= $pokemon->name; ?> (Lv. <?= $pokemon->level; ?>)</li><?php
+								<li><?= isset($pokemon->name) ? $pokemon->name : $pokemon->pokemon; ?> (Lv. <?= $pokemon->level; ?>)</li><?php
 	} ?>
 
 							</ul>

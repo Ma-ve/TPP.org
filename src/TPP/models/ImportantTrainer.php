@@ -41,7 +41,7 @@ class ImportantTrainer extends Trainer {
 					itp.`pokemon`,
 					itp.`level`,
 					itp.`nickname`,
-					itp.`item`
+					IFNULL(itp.`item`, 1)
 				) SEPARATOR '" . self::SEPARATOR_1 . "'
 			) as `pokemon`,
 			GROUP_CONCAT(
@@ -75,7 +75,13 @@ class ImportantTrainer extends Trainer {
 				'time' 		=> $importantTrainer['time'],
 				'order_by' 	=> (int) $importantTrainer['order_by'],
 				'is_rematch' => (bool) $importantTrainer['is_rematch'],
-				'pokemon' => parent::getPokemonForTrainer($importantTrainer['pokemon']),
+				'pokemon' => parent::getPokemonForTrainer($importantTrainer['pokemon'], [
+					'id',
+					'pokemon',
+					'level',
+					'nickname',
+					'item',
+				]),
 			]);
 
 			$moves = [];

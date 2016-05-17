@@ -75,7 +75,11 @@ class EliteFour extends Trainer {
 				'time' 		=> $eliteFour['time'],
 				'order' 	=> (int) $eliteFour['order'],
 				'is_rematch' => (bool) $eliteFour['is_rematch'],
-				'pokemon' => parent::getPokemonForTrainer($eliteFour['pokemon']),
+				'pokemon' => parent::getPokemonForTrainer($eliteFour['pokemon'], [
+					'id',
+					'pokemon',
+					'level',
+				]),
 			]);
 
 			$moves = [];
