@@ -9,7 +9,7 @@ $this->render('elitefour/_general'); ?>
 	$this->render('trainer/_image', ['trainers' => $elitefour]);
 	$this->render('elitefour/_type', ['elitefour' => $elitefour]);
 	$this->render('trainer/_winloss_attempts', ['trainers' => $elitefour]);
-	$this->render('trainer/_pokemon', ['trainers' => $elitefour]);  ?>
+	$this->render('trainer/_pokemon_moreinfo', ['trainers' => $elitefour]);  ?>
 
 					</table>
 				</div>

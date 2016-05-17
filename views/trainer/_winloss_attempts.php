@@ -10,7 +10,10 @@ foreach($trainers as $t) {
 					<tr><?php
 foreach($trainers as $t) { ?>
 
-							<td><strong><?= $t->name; ?></strong></td><?php
+							<td>
+								<span>First beaten: <strong><?= TPP\Helpers\Helper::getDateTime($t->time); ?></strong></span>
+								<br>
+								<span>Attempts first win: <strong><?= $t->attempts; ?></strong></span><?php
 } ?>
 
 					</tr>

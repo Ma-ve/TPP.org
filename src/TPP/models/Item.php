@@ -24,6 +24,8 @@ class Item extends Model {
 	}
 
 	public static function getAllItems() {
+		$return = [];
+
 		$getItems = TPP::db()->query("
 			SELECT
 			 i.`id`, i.`name`, i.`pc`, i.`amount`,
@@ -40,6 +42,7 @@ class Item extends Model {
 			$newItem->setAttributes($item);
 			$return[$item['item_type']][] = $newItem;
 		}
+
 		return $return;
 	}
 }
