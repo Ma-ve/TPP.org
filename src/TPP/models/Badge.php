@@ -27,7 +27,7 @@ class Badge extends Model {
 			b.`leader`,
 			b.`type`,
 			b.`attempts`,
-			GROUP_CONCAT(DISTINCT CONCAT_WS(':', bp.`pokemon`, bp.`level`) SEPARATOR ',') as `leader_pokemon`
+			GROUP_CONCAT(DISTINCT CONCAT_WS('" . self::SEPARATOR_2 . "', bp.`id`, bp.`pokemon`, bp.`level`) SEPARATOR '" . self::SEPARATOR_1 . "') as `leader_pokemon`
 			FROM `badge` b JOIN `badge_pokemon` bp ON bp.`badge_id` = b.`id`" . $where . " GROUP BY b.`id` ORDER BY " . $order . $limit);
 		$obtained = 0;
 

@@ -17,9 +17,17 @@ class Pokemon extends Model
 	public $nickname;
 	public $poke_ball;
 	public $gender;
+
+	/**
+	 * @var $hold_item Item[]
+	 */
 	public $hold_item;
 	public $status;
 	public $box;
+
+	/**
+	 * @var $moves Move[]
+	 */
 	public $moves;
 	public $characteristic;
 	public $ability;
@@ -139,7 +147,14 @@ class Pokemon extends Model
 	public function setMoves($moves) {
 		if($moves) {
 			$return = [];
-			$ex = explode(',', $moves);
+			if(is_string($moves)) {
+				$ex = explode(',', $moves);
+			} elseif(is_array($moves) && !empty($moves)) {
+				$ex = $moves;
+			} else {
+				TPP::setError('Unknown handling of moves: ' . $moves);
+				return;
+			}
 			foreach($ex as $m) {
 				$model       = new Move();
 				$model->name = $m;
@@ -152,6 +167,10 @@ class Pokemon extends Model
 	}
 
 	public static function getFieldsAll(array &$pokemon) {
+		if(empty($pokemon)) {
+			return $pokemon;
+		}
+
 		$ids = [];
 		foreach($pokemon as $k => $p) {
 			$ids[] = $p->id;

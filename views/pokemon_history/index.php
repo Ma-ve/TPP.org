@@ -3,7 +3,11 @@
 $this->render('pokemon_history/_general'); ?>
 
 				<div class="row"><?php
-foreach(array_chunk($pokemon, ceil(count($pokemon) / 2)) as $pokemon) { ?>
+$amount_chunks = ceil(count($pokemon) / 2);
+$amount_chunks = $amount_chunks > 1 ? $amount_chunks : 1;
+
+$chunks = array_chunk($pokemon, $amount_chunks);
+foreach($chunks as $pokemon) { ?>
 
 					<div class="col-md-6">
 						<div class="table-responsive table-bordered table-pokemon pokemon-scrollable mtop20">

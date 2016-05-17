@@ -29,11 +29,20 @@ class SiteController extends Controller
 
 		$badges = Badge::getBadges(null, 'LIMIT 0, 8');
 
-		if($badges['obtained'] >= 8) {
-			$this->render('elitefour/index', [
-				'elitefour' => EliteFour::getEliteFour('is_rematch = 0'), //@TODO: remove
+		$elite_four = EliteFour::getEliteFour('is_rematch = 0');
+
+		if($elite_four['beaten']) {
+			$this->render('importanttrainer/index', [
+				'importanttrainers' => \TPP\Models\ImportantTrainer::getImportantTrainers(),
 			]);
 		}
+
+		if($badges['obtained'] >= 8) {
+			$this->render('elitefour/index', [
+				'elitefour' => $elite_four,
+			]);
+		}
+
 		$this->render('badge/index', [
 			'badges' => $badges,
 		], true);
@@ -126,12 +135,12 @@ class SiteController extends Controller
 	 */
 	public function getGeneral() {
 		$getGeneral = TPP::db()
-						 ->query("SELECT `name`, `value` FROM `general` WHERE `value` != ''") or die(TPP::db()->error);
+						 ->query("SELECT `name`, `value` FROM `general`") or die(TPP::db()->error);
 		$model = new stdClass();
 		while($general = $getGeneral->fetch()) {
 			$model->$general['name'] = utf8_encode(stripslashes($general['value']));
 		}
-		if(isset($model->notice)) {
+		if(isset($model->notice) && $model->notice !== '') {
 			$model->notices = $this->getNotices($model->notice);
 		}
 
