@@ -6,12 +6,12 @@ use TPP\Helpers\Helper;
 
 class Model {
 
-	const SEPARATOR_1 = ",";
-	const SEPARATOR_2 = ":";
+	const SEPARATOR_1 = "%%%";
+	const SEPARATOR_2 = "###";
 
 	public function setAttributes($attributes) {
 		foreach($attributes as $key => $value) {
-			if(isset($value) && $value != '') {
+			if(isset($value) && $value !== '') {
 				if(!property_exists($this, $key)) {
 					$called_class = get_called_class();
 					TPP::setError($called_class . "->" . $key . ": Property '" . $key . "' does not exist for class '" . $called_class . "'");

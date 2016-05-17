@@ -57,7 +57,9 @@ class Badge extends Model {
 	public static function getTrainerForBadge($leader, $pokemon_string) {
 		$trainer = new Trainer();
 		$trainer->setName($leader);
-		$trainer->setPokemon($trainer->getPokemonForTrainer($pokemon_string));
+		$trainer->setPokemon($trainer->getPokemonForTrainer($pokemon_string, [
+			'id', 'pokemon', 'level'
+		], true));
 
 		return $trainer;
 	}

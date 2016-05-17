@@ -24,17 +24,14 @@ class Trainer extends Model {
 		return parent::image('trainers/' . TWITCHVERSION, $this->name);
 	}
 
-	public static function getPokemonForTrainer($pokemon_string, $mapping) {
+	public static function getPokemonForTrainer($pokemon_string, array $mapping, $return = false) {
 		$returnPokemon = [];
 		foreach(explode(self::SEPARATOR_1, $pokemon_string) as $pokemon) {
 			$ex = explode(self::SEPARATOR_2, $pokemon);
 			$newPokemon = new Pokemon();
-			foreach($mapping as $k => $v) {
-				$newPokemon->$k = $v;
+			for($i = 0; $i < count($mapping); $i++) {
+				$newPokemon->$mapping[$i] = $ex[$i];
 			}
-			$newPokemon->id = (int) $ex[0];
-			$newPokemon->name = $ex[1];
-			$newPokemon->level = $ex[2];
 			$returnPokemon[] = $newPokemon;
 		}
 
