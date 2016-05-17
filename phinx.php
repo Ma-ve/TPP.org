@@ -2,6 +2,8 @@
 
 use TPP\Models\TPP;
 
+define('TPP_DEBUG', false);
+
 require("vendor/autoload.php");
 require("models/Init.php");
 
@@ -17,7 +19,7 @@ return [
 		'default_migration_table' => 'migrations',
 		'default_database' => 'development',
 		'development' => [
-			'name' => 'devdb',
+			'name' => DB_DATABASE . TWITCHVERSION,
 			'connection' => TPP::db(),
 		],
 	],
