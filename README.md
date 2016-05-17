@@ -25,6 +25,7 @@ For demo purposes, I'll be using a directory named `red`, located at `/var/www/t
             "TPP_CACHE_KEY" => "cachekey",          // Cache key which can be used to refresh the contents, if caching is enabled
         ];
 
-9. Run `composer install -o`
-10. Run `vendor/bin/phinx migrate`
-11. Load up the site, verify everything works, and you're ready to go.
+9. Make `update.sh` executable: `chmod +x update.sh`
+10. Run `./update.sh`
+11. `update.sh` will `git pull`, `composer install -o`, and `vendor/bin/phinx migrate`
+12. Load up the site, verify everything works, and you're ready to go.
