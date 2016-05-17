@@ -24,4 +24,7 @@ For demo purposes, I'll be using a directory named `red`, located at `/var/www/t
             "DB_PASS" => "tpppass",                 // Database password
             "TPP_CACHE_KEY" => "cachekey",          // Cache key which can be used to refresh the contents, if caching is enabled
         ];
-9. Load up the site, verify everything works, and you're ready to go.
+
+9. Run `composer install -o`
+10. Run `vendor/bin/phinx migrate`
+11. Load up the site, verify everything works, and you're ready to go.

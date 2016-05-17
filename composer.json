@@ -6,7 +6,9 @@
             "email": "info@mave.me"
         }
     ],
-    "require": {},
+    "require": {
+        "robmorgan/phinx": "*"
+    },
     "require-dev": {
         "jdorn/sql-formatter": "^1.2"
     },
