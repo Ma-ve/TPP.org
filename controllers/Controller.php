@@ -9,11 +9,11 @@ class Controller {
 			}
 		}
 
-		$view_file = 'views/' . $view . '.php';
+		$view_file = __DIR__ . '/../views/' . $view . '.php';
 
 		if(!TPP_DEBUG) {
 			$write_cache = $cache && isset($_GET[TPP_CACHE_KEY]) ? true : false;
-			$c_directory = 'cached/' . $view;
+			$c_directory = __DIR__ . '../cached/' . $view;
 			$c_file = '_cached.html';
 			if($write_cache) {
 				$this->cache($c_directory, $c_file, $view_file);
@@ -34,8 +34,9 @@ class Controller {
 		unset($dirs[count($dirs) - 1]);
 		unset($dirs[0]);
 		foreach($dirs as $dir) {
-			if(!is_dir('cached/' . $dir)) {
-				mkdir('cached/'  . $dir);
+			$dir = __DIR__ . '/../cached/' . $dir;
+			if(!is_dir($dir)) {
+				mkdir($dir);
 			}
 		}
 	}
