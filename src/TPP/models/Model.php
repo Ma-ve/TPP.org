@@ -16,7 +16,7 @@ class Model {
 					$called_class = get_called_class();
 					TPP::setError($called_class . "->" . $key . ": Property '" . $key . "' does not exist for class '" . $called_class . "'");
 				}
-				$key = gettype($key) === 'string' ? Helper::utf8ify($key) : $key;
+				$key = gettype($key) === 'string' && !ctype_alnum(str_replace(['-','_',' '], '', $key)) ? Helper::utf8ify($key) : $key;
 				$this->$key = gettype($value) === 'string' ? Helper::utf8ify($value) : $value;
 			}
 		}
