@@ -138,7 +138,7 @@ class SiteController extends Controller
 						 ->query("SELECT `name`, `value` FROM `general`") or die(TPP::db()->error);
 		$model = new stdClass();
 		while($general = $getGeneral->fetch()) {
-			$model->$general['name'] = utf8_encode(stripslashes($general['value']));
+			$model->{$general['name']} = utf8_encode(stripslashes($general['value']));
 		}
 		if(isset($model->notice) && $model->notice !== '') {
 			$model->notices = $this->getNotices($model->notice);
