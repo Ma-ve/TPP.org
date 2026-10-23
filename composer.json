@@ -7,14 +7,20 @@
         }
     ],
     "require": {
-        "robmorgan/phinx": "*"
+        "php": "^8.2",
+        "ext-iconv": "*",
+        "ext-mbstring": "*",
+        "ext-pdo": "*",
+        "ext-pdo_mysql": "*",
+        "robmorgan/phinx": "^0.16.12"
     },
     "require-dev": {
         "jdorn/sql-formatter": "^1.2"
     },
     "autoload": {
         "psr-4": {
-            "TPP\\":"src/"
+            "TPP\\Models\\": "src/TPP/models/",
+            "TPP\\Helpers\\": "src/TPP/Helpers/"
         }
     }
 }

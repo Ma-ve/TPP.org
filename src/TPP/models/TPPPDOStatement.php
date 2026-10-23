@@ -11,11 +11,12 @@ class TPPPDOStatement extends PDOStatement {
 
 	}
 
-	public function execute($input_parameters = null) {
+	public function execute(?array $params = null): bool {
 		try {
-			return parent::execute($input_parameters);
+			return parent::execute($params);
 		} catch(Exception $e) {
 			TPP::setError($e);
+			return false;
 		}
 	}
 

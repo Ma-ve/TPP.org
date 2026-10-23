@@ -44,7 +44,7 @@ class Pokemon extends Model
 	public $next_move_level;
 
 	public static function getPartyPokemon() {
-		return Pokemon::queryPokemon('p.`status` = 1', `party_order`, '6');
+		return Pokemon::queryPokemon('p.`status` = 1', '`party_order`', '6');
 	}
 
 	public static function queryPokemon($where = null, $order = null, $limit = null) {
@@ -110,7 +110,7 @@ class Pokemon extends Model
 	}
 
 	public function setNickname($nickname) {
-		return isset($nickname) ? stripslashes(utf8_encode($nickname)) : 'No nickname';
+		return isset($nickname) ? stripslashes(mb_convert_encoding($nickname, 'UTF-8', 'ISO-8859-1')) : 'No nickname';
 	}
 
 	public function setPokeBall($poke_ball) {
@@ -340,7 +340,7 @@ class Pokemon extends Model
 			return '<em>' . $this->nickname . '</em>';
 		} else {
 			foreach($array as $ar) {
-				$return .= '"' . utf8_decode($ar) . '"';
+				$return .= '"' . mb_convert_encoding($ar, 'ISO-8859-1', 'UTF-8') . '"';
 				if(count($array) > 1) {
 					$return .= $i < count($array) - 1 ? ',<br>' : '';
 				}

@@ -5,6 +5,10 @@ Source code for http://twitchplayspokemon.org/
 ~~See [this reddit thread](https://www.reddit.com/r/twitchplayspokemon/comments/3754i1/developers_tpporg_is_calling_for_you_ive_rebuilt/) for instructions on how to run it locally~~
 
 # Installation
+
+Use PHP 8.4, Composer 2, and the `pdo_mysql`, `mbstring`, and `iconv` extensions. Run `composer install -o` after
+updating the source to install the versions in `composer.lock`.
+
 For demo purposes, I'll be using a directory named `red`, located at `/var/www/twitchplayspokemon/`.
 
 1. `git clone` the repository to `/var/www/twitchplayspokemon/`. Rename the newly created folder to `red`.

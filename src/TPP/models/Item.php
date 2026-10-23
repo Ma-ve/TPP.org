@@ -16,7 +16,7 @@ class Item extends Model {
 	}
 
 	public function setName($name) {
-		$this->name = utf8_encode($name);
+		$this->name = mb_convert_encoding($name, 'UTF-8', 'ISO-8859-1');
 	}
 
 	public function showImage() {

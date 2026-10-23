@@ -23,15 +23,17 @@ class TPPPDO extends PDO {
 	}
 
 	/**
-	 * @param string $content
+	 * @param string $query
+	 * @param int|null $fetchMode
+	 * @param mixed ...$fetchModeArgs
 	 *
-	 * @return PDOStatement
+	 * @return PDOStatement|false
 	 */
-	public function query($content) {
-		$this->log($content);
+	public function query(string $query, ?int $fetchMode = null, mixed ...$fetchModeArgs): PDOStatement|false {
+		$this->log($query);
 
 		try {
-			return parent::query($content);
+			return parent::query($query, $fetchMode, ...$fetchModeArgs);
 		} catch(Exception $e) {
 			TPP::setError($e);
 			return false;
@@ -39,22 +41,23 @@ class TPPPDO extends PDO {
 	}
 
 	/**
-	 * @param string $content
-	 * @param null   $options
+	 * @param string $query
+	 * @param array  $options
 	 *
-	 * @return PDOStatement
+	 * @return PDOStatement|false
 	 */
-	public function prepare($content, $options = []) {
+	public function prepare(string $query, array $options = []): PDOStatement|false {
 		try {
-			$this->log($content);
+			$this->log($query);
 
-			$prepare  = parent::prepare($content, $options);
+			$prepare  = parent::prepare($query, $options);
 			$prepare2 = &$prepare;
 			$this->log($prepare2, 'prepare', false);
 
 			return $prepare2;
 		} catch(Exception $e) {
 			TPP::setError($e);
+			return false;
 		}
 
 	}
@@ -81,7 +84,7 @@ class TPPPDO extends PDO {
 			}
 			$GLOBALS['log'][$key][] = [
 				$trace,
-				(new DateTime(date("Y-m-d H:i:s." . $micro, $t)))->format('Y-m-d H:i:s.u'),
+				(new DateTime(date("Y-m-d H:i:s." . $micro, (int)$t)))->format('Y-m-d H:i:s.u'),
 				$query ? SqlFormatter::highlight($content) : $content,
 			];
 		}

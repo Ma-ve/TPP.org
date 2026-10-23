@@ -25,7 +25,7 @@ class CreateRouteTable extends AbstractMigration
 	 * Remember to call "create()" or "update()" and NOT "save()" when working
 	 * with the Table class.
 	 */
-	public function up() {
+	public function up(): void {
 		$table = $this->table('route');
 		$table
 			->addColumn('name', 'string', ['limit' => 40])
@@ -34,6 +34,6 @@ class CreateRouteTable extends AbstractMigration
 		;
 	}
 
-	public function down() {
+	public function down(): void {
 	}
 }

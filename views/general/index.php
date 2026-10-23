@@ -20,10 +20,10 @@ use TPP\Helpers\Helper;
 	} ?>
 
 			<div class="pull-left current-status">
-				<p>Current Goal: <strong><?= utf8_decode($general->current_goal); ?></strong></p>
-				<p>Optional Goal: <strong><?= !empty($general->optional_goal) ? utf8_decode($general->optional_goal) : '-'; ?></strong></p>
-				<p>Current Location: <strong><?= utf8_decode($general->current_location); ?></strong></p>
-				<p>Current Pok&eacute;center: <strong><?= utf8_decode($general->current_pokecenter); ?></strong></p>
+				<p>Current Goal: <strong><?= mb_convert_encoding($general->current_goal, 'ISO-8859-1', 'UTF-8'); ?></strong></p>
+				<p>Optional Goal: <strong><?= !empty($general->optional_goal) ? mb_convert_encoding($general->optional_goal, 'ISO-8859-1', 'UTF-8') : '-'; ?></strong></p>
+				<p>Current Location: <strong><?= mb_convert_encoding($general->current_location, 'ISO-8859-1', 'UTF-8'); ?></strong></p>
+				<p>Current Pok&eacute;center: <strong><?= mb_convert_encoding($general->current_pokecenter, 'ISO-8859-1', 'UTF-8'); ?></strong></p>
 				<p>Money in hand: <strong><?= Image::toImage('/items', 'pokedollar', ['title' => 'Pok&eacute;dollar', 'alt' => 'Pok&eacute;dollar']); ?><?= $general->money; ?></strong></p>
 			</div>
 					<div class="current-info pull-right text-right">

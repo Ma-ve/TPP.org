@@ -30,7 +30,7 @@ class Trainer extends Model {
 			$ex = explode(self::SEPARATOR_2, $pokemon);
 			$newPokemon = new Pokemon();
 			for($i = 0; $i < count($mapping); $i++) {
-				$newPokemon->$mapping[$i] = $ex[$i];
+				$newPokemon->{$mapping[$i]} = $ex[$i];
 			}
 			$returnPokemon[] = $newPokemon;
 		}
